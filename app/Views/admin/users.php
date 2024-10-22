@@ -2,11 +2,15 @@
 
 <?= $this->section('content'); ?>
 <h1>User Management</h1>
-<a href="<?= base_url('admin/create_user_form'); ?> " class="btn btn-primary">Add New User</a>
+<div>
+    <a href="<?= base_url('admin/create_user_form'); ?> " class="btn btn-primary">Add New User</a>
+</div>
+<br>
 <table class="table table-bordered">
     <thead class="thead-dark">
         <tr>
             <th>ID</th>
+            <th>Name</th>
             <th>Username</th>
             <th>Email</th>
             <th>Role</th>
@@ -17,6 +21,7 @@
         <?php foreach ($users as $user): ?>
             <tr>
                 <td><?= $user['id']; ?></td>
+                <td><?= $user['name']; ?></td>
                 <td><?= $user['username']; ?></td>
                 <td><?= $user['email']; ?></td>
                 <td><?= $user['role']; ?></td>

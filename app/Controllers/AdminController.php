@@ -40,6 +40,7 @@ class AdminController extends BaseController
     {
         $model = new UserModel();
         $data = [
+            'name' => $this->request->getPost('name'),
             'username' => $this->request->getPost('username'),
             'email' => $this->request->getPost('email'),
             'role' => $this->request->getPost('role')
