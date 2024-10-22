@@ -181,46 +181,26 @@ class AdminController extends BaseController
         return view('admin/rental_history', $data);
     }
 
-    public function createRental()
-    {
-        $unitModel = new UnitModel(); // Ensure you load the necessary models
-        $data['units'] = $unitModel->findAll();
-        return view('admin/create_rental', $data);
-    }
-
-    public function storeRental()
-    {
-        $model = new RentalModel();
-        $model->save([
-            'user_id' => $this->request->getPost('user_id'), // Assuming you're getting this from a form or another method
-            'unit_id' => $this->request->getPost('unit_id'),
-            'rental_date' => $this->request->getPost('rental_date'),
-            'days_rented' => $this->request->getPost('days_rented'),
-            'cost' => $this->request->getPost('cost'),
-            'status_rent' => 'waiting_approval', // Default on creation
-            'status_paid' => 'unpaid' // Default on creation
-        ]);
-        return redirect()->to('/admin/rental_history');
-    }
-
     public function editRental($id)
     {
         $model = new RentalModel();
-        $data['rental'] = $model->find($id);
-        $unitModel = new UnitModel();
-        $data['units'] = $unitModel->findAll();
-        return view('admin/edit_rental', $data);
+        $rental = $model->getRentalDetails($id);
+
+        if (!$rental) {
+            return redirect()->to('/admin/rental_history')->with('error', 'Rental not found');
+        }
+
+        return view('admin/edit_rental', ['rental' => $rental]);
     }
+
 
     public function updateRental($id)
     {
         $model = new RentalModel();
-        $model->update($id, [
-            'days_rented' => $this->request->getPost('days_rented'),
-            'cost' => $this->request->getPost('cost'),
-            'status_rent' => $this->request->getPost('status_rent'),
-            'status_paid' => $this->request->getPost('status_paid')
-        ]);
+        $data = [
+            'status_rent' => $this->request->getPost('status_rent')
+        ];
+        $model->update($id, $data);
         return redirect()->to('/admin/rental_history');
     }
 
@@ -230,6 +210,7 @@ class AdminController extends BaseController
         $model->delete($id);
         return redirect()->to('/admin/rental_history');
     }
+
 
     public function policies()
     {
