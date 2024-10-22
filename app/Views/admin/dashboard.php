@@ -4,7 +4,7 @@
 <h1>Welcome to the Admin Dashboard</h1>
 <p>Hello, <?= session()->get('username'); ?>! You are logged in as an admin.</p>
 <!-- Logout Button -->
-<form action="<?= base_url('logout'); ?>" method="post">
+<form action="<?= base_url('logout'); ?>" method="get">
     <button type="submit">Log Out</button>
 </form>
 <?= $this->endSection(); ?>
