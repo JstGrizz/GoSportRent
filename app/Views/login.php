@@ -10,7 +10,7 @@
 <body>
     <h1>Login</h1>
     <?php if (session()->getFlashdata('error')): ?>
-        <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
+    <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
     <?php endif; ?>
     <form action="<?= base_url('auth/login') ?>" method="post">
         <div>
@@ -23,6 +23,9 @@
         </div>
         <div>
             <button type="submit">Login</button>
+        </div>
+        <div>
+            <p>Doesnt have an account? <a href="<?= base_url('register') ?>">Register here</a></p>
         </div>
     </form>
 </body>
