@@ -21,7 +21,7 @@
                 <tr>
                     <td><?= $policy['id']; ?></td>
                     <td><?= $policy['max_rental_days']; ?></td>
-                    <td><?= number_format($policy['overdue_fee_per_day'], 2); ?></td>
+                    <td><?= number_format($policy['overdue_fee_per_day'], 0); ?></td>
                     <td>
                         <a href="<?= base_url('admin/edit_policy/' . $policy['id']); ?>" class="btn btn-warning">Edit</a>
                         <a href="<?= base_url('admin/delete_policy/' . $policy['id']); ?>" class="btn btn-danger"
