@@ -6,50 +6,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            min-height: 100vh;
+            margin: 0;
+        }
 
-    .sidebar {
-        width: 200px;
-        position: fixed;
-        height: 100%;
-        background: #f4f4f4;
-        padding: 20px 0;
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    }
+        .sidebar {
+            width: 250px;
+            background-color: #f8f8f8;
+            transition: width 0.3s ease;
+        }
 
-    .content {
-        margin-left: 220px;
-        padding: 20px;
-    }
+        .sidebar.collapsed {
+            width: 60px;
+        }
 
-    ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
 
-    ul li a {
-        display: block;
-        padding: 10px 20px;
-        text-decoration: none;
-        color: #333;
-    }
+        .content.expanded {
+            margin-left: 250px;
+        }
 
-    ul li a:hover,
-    ul li a.active {
-        background-color: #ddd;
-    }
+        .content.collapsed {
+            margin-left: 60px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        ul li a:hover,
+        ul li a.active {
+            background-color: #ddd;
+        }
     </style>
+
+    <link href="../../public/Assets/lumino/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../public/Assets/lumino/css/datepicker3.css" rel="stylesheet">
+    <link href="../../public/Assets/lumino/css/styles.css" rel="stylesheet">
 </head>
 
 <body>
     <?= view('template/sidebar'); ?>
 
-    <div class="content">
+    <div class="content expanded">
         <?= $this->renderSection('content'); ?>
     </div>
+
+    <script>
+        // Script to toggle sidebar collapse
+        document.querySelector('.navbar-toggle').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar-collapse');
+            const content = document.querySelector('.content');
+
+            if (sidebar.classList.contains('collapsed')) {
+                sidebar.classList.remove('collapsed');
+                content.classList.remove('collapsed');
+                content.classList.add('expanded');
+            } else {
+                sidebar.classList.add('collapsed');
+                content.classList.remove('expanded');
+                content.classList.add('collapsed');
+            }
+        });
+    </script>
 </body>
 
 </html>

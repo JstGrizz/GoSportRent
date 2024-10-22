@@ -2,9 +2,9 @@
 
 <?= $this->section('content'); ?>
 <h1>User Management</h1>
-<a href="<?= base_url('admin/create_user_form'); ?>">Add New User</a>
-<table>
-    <thead>
+<a href="<?= base_url('admin/create_user_form'); ?> " class="btn btn-primary">Add New User</a>
+<table class="table table-bordered">
+    <thead class="thead-dark">
         <tr>
             <th>ID</th>
             <th>Username</th>
@@ -21,8 +21,8 @@
                 <td><?= $user['email']; ?></td>
                 <td><?= $user['role']; ?></td>
                 <td>
-                    <a href="<?= base_url('admin/edit_user/' . $user['id']); ?>">Edit</a>
-                    <a href="<?= base_url('admin/delete_user/' . $user['id']); ?>"
+                    <a href="<?= base_url('admin/edit_user/' . $user['id']); ?> " class="btn btn-warning">Edit</a>
+                    <a href="<?= base_url('admin/delete_user/' . $user['id']); ?>" class="btn btn-danger"
                         onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
             </tr>
