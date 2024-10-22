@@ -34,6 +34,9 @@
         <li><a href="<?= base_url('admin/units'); ?>"></span> Master Units</a></li>
         <li><a href="<?= base_url('admin/rental_history'); ?>"></span> Rental History</a></li>
         <li><a href="<?= base_url('admin/policies'); ?>"></span> Policy Penalties and Fees</a></li>
+        <form action="<?= base_url('logout'); ?>" method="get">
+            <button type="submit" class="btn btn-danger">Log Out</button>
+        </form>
     </ul>
 </div>
 <!--/.sidebar-->
