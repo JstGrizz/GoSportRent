@@ -115,7 +115,7 @@ class AdminController extends BaseController
     public function units()
     {
         $model = new UnitModel();
-        $data['units'] = $model->fetchUnitsWithCategory(); // Use the new method
+        $data['units'] = $model->fetchUnitsWithCategory();
         return view('admin/units', $data);
     }
 
@@ -133,10 +133,14 @@ class AdminController extends BaseController
         $model->save([
             'name' => $this->request->getPost('name'),
             'unit_code' => $this->request->getPost('unit_code'),
-            'category_id' => $this->request->getPost('category_id')
+            'category_id' => $this->request->getPost('category_id'),
+            'stock' => $this->request->getPost('stock'),
+            'cost_rent_per_day' => $this->request->getPost('cost_rent_per_day'),
+            'cost_rent_per_month' => $this->request->getPost('cost_rent_per_month')
         ]);
         return redirect()->to('/admin/units');
     }
+
 
     public function editUnit($id)
     {
@@ -153,10 +157,14 @@ class AdminController extends BaseController
         $model->update($id, [
             'name' => $this->request->getPost('name'),
             'unit_code' => $this->request->getPost('unit_code'),
-            'category_id' => $this->request->getPost('category_id')
+            'category_id' => $this->request->getPost('category_id'),
+            'stock' => $this->request->getPost('stock'),
+            'cost_rent_per_day' => $this->request->getPost('cost_rent_per_day'),
+            'cost_rent_per_month' => $this->request->getPost('cost_rent_per_month')
         ]);
         return redirect()->to('/admin/units');
     }
+
 
     public function deleteUnit($id)
     {
@@ -168,7 +176,103 @@ class AdminController extends BaseController
     public function rentalHistory()
     {
         $model = new RentalModel();
-        $data['rentals'] = $model->getDetailedRentals();
+        $data['rentals'] = $model->fetchDetailedRentals();
         return view('admin/rental_history', $data);
+    }
+
+    public function createRental()
+    {
+        $unitModel = new UnitModel(); // Ensure you load the necessary models
+        $data['units'] = $unitModel->findAll();
+        return view('admin/create_rental', $data);
+    }
+
+    public function storeRental()
+    {
+        $model = new RentalModel();
+        $model->save([
+            'user_id' => $this->request->getPost('user_id'), // Assuming you're getting this from a form or another method
+            'unit_id' => $this->request->getPost('unit_id'),
+            'rental_date' => $this->request->getPost('rental_date'),
+            'days_rented' => $this->request->getPost('days_rented'),
+            'cost' => $this->request->getPost('cost'),
+            'status_rent' => 'waiting_approval', // Default on creation
+            'status_paid' => 'unpaid' // Default on creation
+        ]);
+        return redirect()->to('/admin/rental_history');
+    }
+
+    public function editRental($id)
+    {
+        $model = new RentalModel();
+        $data['rental'] = $model->find($id);
+        $unitModel = new UnitModel();
+        $data['units'] = $unitModel->findAll();
+        return view('admin/edit_rental', $data);
+    }
+
+    public function updateRental($id)
+    {
+        $model = new RentalModel();
+        $model->update($id, [
+            'days_rented' => $this->request->getPost('days_rented'),
+            'cost' => $this->request->getPost('cost'),
+            'status_rent' => $this->request->getPost('status_rent'),
+            'status_paid' => $this->request->getPost('status_paid')
+        ]);
+        return redirect()->to('/admin/rental_history');
+    }
+
+    public function deleteRental($id)
+    {
+        $model = new RentalModel();
+        $model->delete($id);
+        return redirect()->to('/admin/rental_history');
+    }
+
+    public function policies()
+    {
+        $model = new \App\Models\PolicyModel();
+        $data['policies'] = $model->findAll();
+        return view('admin/policies', $data);
+    }
+
+    public function createPolicy()
+    {
+        return view('admin/create_policy');
+    }
+
+    public function storePolicy()
+    {
+        $model = new \App\Models\PolicyModel();
+        $model->save([
+            'max_rental_days' => $this->request->getPost('max_rental_days'),
+            'overdue_fee_per_day' => $this->request->getPost('overdue_fee_per_day')
+        ]);
+        return redirect()->to('/admin/policies');
+    }
+
+    public function editPolicy($id)
+    {
+        $model = new \App\Models\PolicyModel();
+        $data['policy'] = $model->find($id);
+        return view('admin/edit_policy', $data);
+    }
+
+    public function updatePolicy($id)
+    {
+        $model = new \App\Models\PolicyModel();
+        $model->update($id, [
+            'max_rental_days' => $this->request->getPost('max_rental_days'),
+            'overdue_fee_per_day' => $this->request->getPost('overdue_fee_per_day')
+        ]);
+        return redirect()->to('/admin/policies');
+    }
+
+    public function deletePolicy($id)
+    {
+        $model = new \App\Models\PolicyModel();
+        $model->delete($id);
+        return redirect()->to('/admin/policies');
     }
 }

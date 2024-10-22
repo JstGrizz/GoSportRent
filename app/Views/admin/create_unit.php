@@ -16,6 +16,15 @@
         <?php endforeach; ?>
     </select>
 
+    <label for="stock">Stock:</label>
+    <input type="number" name="stock" id="stock" required>
+
+    <label for="cost_rent_per_day">Cost Rent per Day:</label>
+    <input type="text" name="cost_rent_per_day" id="cost_rent_per_day" required>
+
+    <label for="cost_rent_per_month">Cost Rent per Month:</label>
+    <input type="text" name="cost_rent_per_month" id="cost_rent_per_month" required>
+
     <button type="submit">Add Unit</button>
 </form>
 <?= $this->endSection(); ?>

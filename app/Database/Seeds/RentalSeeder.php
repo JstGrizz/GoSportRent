@@ -8,15 +8,16 @@ class RentalSeeder extends \CodeIgniter\Database\Seeder
     {
         $data = [
             [
-                'user_id' => 2,
+                'user_id' => 1,
                 'unit_id' => 1,
-                'rental_date' => '2021-01-01',
-                'return_date' => '2021-01-05',
-                'status' => 'returned'
-            ]
+                'rental_date' => '2024-01-01',
+                'days_rented' => 5,
+                'cost' => 500.00,
+                'status_rent' => 'rented',
+                'status_paid' => 'unpaid',
+            ],
         ];
 
-        // Using Query Builder
         $this->db->table('rentals')->insertBatch($data);
     }
 }
