@@ -2,7 +2,6 @@
 
 <?= $this->section('content'); ?>
 <h1>Rental Management</h1>
-<a href="<?= base_url('rentals/create'); ?>" class="btn btn-primary">Create New Rental</a>
 <table class="table table-bordered">
     <thead class="thead-dark">
         <tr>
