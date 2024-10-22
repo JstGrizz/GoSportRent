@@ -16,25 +16,28 @@
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">Log in</div>
                 <div class="panel-body">
-                    <form role="form" form action="<?= base_url('auth/login') ?>" method="post">
+                    <form role="form" action="<?= base_url('auth/login') ?>" method="post">
                         <fieldset>
                             <?php if (session()->getFlashdata('error')): ?>
-                                <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
+                            <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
                             <?php endif; ?>
-                            <div class=form-group>
+
+                            <div class="form-group">
                                 <label for="username">Username</label>
-                                <input type="text" name="username" id="username" required>
+                                <input type="text" name="username" id="username" class="form-control" required>
                             </div>
-                            <div class=form-group>
+
+                            <div class="form-group">
                                 <label for="password">Password</label>
-                                <input type="password" name="password" id="password" required>
+                                <input type="password" name="password" id="password" class="form-control" required>
                             </div>
-                            <div>
-                                <button type="submit" class="btn btn-primary">Login</button>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block">Login</button>
                             </div>
-                            <div>
-                                <br>
-                                <p>Doesnt have an account? <a href="<?= base_url('register') ?>">Register here</a></p>
+
+                            <div class="form-group text-center">
+                                <p>Don't have an account? <a href="<?= base_url('register') ?>">Register here</a></p>
                             </div>
                         </fieldset>
                     </form>

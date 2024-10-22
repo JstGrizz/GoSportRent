@@ -49,19 +49,9 @@ class Auth extends BaseController
         $password = $this->request->getVar('password');
         $confirmPassword = $this->request->getVar('confirm_password');
 
-        // Validation username and email
-        if (empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
-            $_SESSION['error'] = 'All fields are required';
-            return redirect()->back();
-        } else if ($password !== $confirmPassword) {
-            $_SESSION['error'] = 'Passwords do not match';
-            return redirect()->back();
-        }
-
         // Check if user or email already exists
-        else if ($model->where('username', $username)->first() || $model->where('email', $email)->first()) {
-            $_SESSION['error'] = 'Username or Email already exists';
-            return redirect()->to(base_url('register'));
+        if ($model->where('username', $username)->first() || $model->where('email', $email)->first()) {
+            return redirect()->to(base_url('register'))->with('error', 'Username or Email already exists');;     
         }
 
         // Save user details
