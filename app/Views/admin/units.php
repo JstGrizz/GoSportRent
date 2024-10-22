@@ -31,8 +31,8 @@
                 <td><?= number_format($unit['cost_rent_per_day'], 0); ?></td>
                 <td><?= number_format($unit['cost_rent_per_month'], 0); ?></td>
                 <td>
-                    <a href="<?= base_url('admin/edit_unit/' . $unit['id']); ?>" class="btn btn-primary">Edit</a>
-                    <a href="<?= base_url('admin/delete_unit/' . $unit['id']); ?>" class="btn btn-warning"
+                    <a href="<?= base_url('admin/edit_unit/' . $unit['id']); ?>" class="btn btn-warning">Edit</a>
+                    <a href="<?= base_url('admin/delete_unit/' . $unit['id']); ?>" class="btn btn-danger"
                         onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
             </tr>

@@ -16,7 +16,7 @@ class AdminController extends BaseController
     {
         // Check if user is logged in and is an admin
         if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
-            return redirect()->to('/login');
+            return redirect()->to(base_url('/login'));
         }
 
         return view('admin/dashboard');
@@ -24,6 +24,11 @@ class AdminController extends BaseController
 
     public function users()
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new UserModel();
         $data['users'] = $model->findAll();
         return view('admin/users', $data);
@@ -31,6 +36,11 @@ class AdminController extends BaseController
 
     public function editUser($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new UserModel();
         $data['user'] = $model->find($id);
         return view('admin/edit_user', $data);
@@ -38,6 +48,11 @@ class AdminController extends BaseController
 
     public function updateUser($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new UserModel();
         $data = [
             'name' => $this->request->getPost('name'),
@@ -51,6 +66,11 @@ class AdminController extends BaseController
 
     public function deleteUser($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new UserModel();
         $model->delete($id);
         return redirect()->to('/admin/users');
@@ -58,6 +78,11 @@ class AdminController extends BaseController
 
     public function createUser()
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new UserModel();
         $data = [
             'username' => $this->request->getPost('username'),
@@ -71,6 +96,11 @@ class AdminController extends BaseController
 
     public function categories()
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new CategoryModel();
         $data['categories'] = $model->findAll();
         return view('admin/categories', $data);
@@ -78,11 +108,21 @@ class AdminController extends BaseController
 
     public function createCategory()
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         return view('admin/create_category');
     }
 
     public function storeCategory()
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new CategoryModel();
         $model->save([
             'name' => $this->request->getPost('name')
@@ -92,6 +132,11 @@ class AdminController extends BaseController
 
     public function editCategory($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new CategoryModel();
         $data['category'] = $model->find($id);
         return view('admin/edit_category', $data);
@@ -99,6 +144,11 @@ class AdminController extends BaseController
 
     public function updateCategory($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new CategoryModel();
         $model->update($id, [
             'name' => $this->request->getPost('name')
@@ -108,6 +158,11 @@ class AdminController extends BaseController
 
     public function deleteCategory($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new CategoryModel();
         $model->delete($id);
         return redirect()->to('/admin/categories');
@@ -115,6 +170,11 @@ class AdminController extends BaseController
 
     public function units()
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new UnitModel();
         $data['units'] = $model->fetchUnitsWithCategory();
         return view('admin/units', $data);
@@ -123,6 +183,11 @@ class AdminController extends BaseController
 
     public function createUnit()
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $categoryModel = new CategoryModel();
         $data['categories'] = $categoryModel->findAll();
         return view('admin/create_unit', $data);
@@ -130,6 +195,11 @@ class AdminController extends BaseController
 
     public function storeUnit()
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new UnitModel();
         $model->save([
             'name' => $this->request->getPost('name'),
@@ -145,6 +215,11 @@ class AdminController extends BaseController
 
     public function editUnit($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new UnitModel();
         $categoryModel = new CategoryModel();
         $data['unit'] = $model->find($id);
@@ -154,6 +229,11 @@ class AdminController extends BaseController
 
     public function updateUnit($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new UnitModel();
         $model->update($id, [
             'name' => $this->request->getPost('name'),
@@ -169,6 +249,11 @@ class AdminController extends BaseController
 
     public function deleteUnit($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new UnitModel();
         $model->delete($id);
         return redirect()->to('/admin/units');
@@ -176,6 +261,11 @@ class AdminController extends BaseController
 
     public function rentalHistory()
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new RentalModel();
         $data['rentals'] = $model->fetchDetailedRentals();
         return view('admin/rental_history', $data);
@@ -183,6 +273,11 @@ class AdminController extends BaseController
 
     public function editRental($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new RentalModel();
         $rental = $model->getRentalDetails($id);
 
@@ -196,6 +291,11 @@ class AdminController extends BaseController
 
     public function updateRental($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new RentalModel();
         $data = [
             'status_rent' => $this->request->getPost('status_rent')
@@ -206,6 +306,11 @@ class AdminController extends BaseController
 
     public function deleteRental($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new RentalModel();
         $model->delete($id);
         return redirect()->to('/admin/rental_history');
@@ -214,6 +319,11 @@ class AdminController extends BaseController
 
     public function policies()
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new \App\Models\PolicyModel();
         $data['policies'] = $model->findAll();
         return view('admin/policies', $data);
@@ -221,11 +331,21 @@ class AdminController extends BaseController
 
     public function createPolicy()
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         return view('admin/create_policy');
     }
 
     public function storePolicy()
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new \App\Models\PolicyModel();
         $model->save([
             'max_rental_days' => $this->request->getPost('max_rental_days'),
@@ -236,6 +356,11 @@ class AdminController extends BaseController
 
     public function editPolicy($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new \App\Models\PolicyModel();
         $data['policy'] = $model->find($id);
         return view('admin/edit_policy', $data);
@@ -243,6 +368,11 @@ class AdminController extends BaseController
 
     public function updatePolicy($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new \App\Models\PolicyModel();
         $model->update($id, [
             'max_rental_days' => $this->request->getPost('max_rental_days'),
@@ -253,6 +383,11 @@ class AdminController extends BaseController
 
     public function deletePolicy($id)
     {
+        // Check if user is logged in and is an admin
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new \App\Models\PolicyModel();
         $model->delete($id);
         return redirect()->to('/admin/policies');
