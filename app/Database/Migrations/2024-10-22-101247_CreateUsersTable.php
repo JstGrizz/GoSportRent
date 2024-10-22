@@ -19,6 +19,10 @@ class CreateUsersTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '255'
             ],
+            'email' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255'
+            ],
             'password' => [
                 'type' => 'VARCHAR',
                 'constraint' => '255'
@@ -30,7 +34,14 @@ class CreateUsersTable extends Migration
             ],
             'created_at' => [
                 'type' => 'TIMESTAMP',
-                'default' => 'CURRENT_TIMESTAMP'
+                'null' => true,
+                'default' => null,
+                'on update' => 'CURRENT_TIMESTAMP'
+            ],
+            'updated_at' => [
+                'type' => 'TIMESTAMP',
+                'null' => true,
+                'default' => null
             ]
         ]);
         $this->forge->addKey('id', true);

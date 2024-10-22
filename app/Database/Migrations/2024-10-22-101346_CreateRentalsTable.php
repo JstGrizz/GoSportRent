@@ -17,17 +17,21 @@ class CreateRentalsTable extends Migration
             ],
             'user_id' => [
                 'type' => 'INT',
-                'unsigned' => true
+                'unsigned' => true,
+                'null' => false
             ],
             'unit_id' => [
                 'type' => 'INT',
-                'unsigned' => true
+                'unsigned' => true,
+                'null' => false
             ],
             'rental_date' => [
-                'type' => 'DATE'
+                'type' => 'DATE',
+                'null' => false
             ],
             'return_date' => [
-                'type' => 'DATE'
+                'type' => 'DATE',
+                'null' => false
             ],
             'status' => [
                 'type' => 'ENUM',
