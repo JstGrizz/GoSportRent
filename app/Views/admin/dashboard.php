@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<?= $this->extend('template/admin_layout'); ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-</head>
-
-<body>
-    <h1>Welcome to Admin Dashboard</h1>
-
-    <!-- Display the username from the session -->
-    <p>Hello, <?= session()->get('username'); ?>! You are logged in as an Admin.</p>
-
-    <!-- Logout Button -->
-    <form action="<?= base_url('logout'); ?>" method="get">
-        <button type="submit">Log Out</button>
-    </form>
-</body>
-
-</html>
+<?= $this->section('content'); ?>
+<h1>Welcome to the Admin Dashboard</h1>
+<p>Hello, <?= session()->get('username'); ?>! You are logged in as an admin.</p>
+<!-- Logout Button -->
+<form action="<?= base_url('logout'); ?>" method="get">
+    <button type="submit">Log Out</button>
+</form>
+<?= $this->endSection(); ?>
