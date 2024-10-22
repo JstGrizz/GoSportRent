@@ -30,4 +30,13 @@ class RentalModel extends Model
             ->join('units', 'units.id = rentals.unit_id')
             ->findAll();
     }
+
+    public function getRentalDetails($id)
+    {
+        return $this->select('rentals.*, users.name as user_name, units.name as unit_name, users.username, units.unit_code')
+            ->join('users', 'users.id = rentals.user_id')
+            ->join('units', 'units.id = rentals.unit_id')
+            ->where('rentals.id', $id)
+            ->first();
+    }
 }

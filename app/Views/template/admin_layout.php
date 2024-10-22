@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link href="<?= base_url('/Assets/lumino/css/bootstrap.min.css'); ?>" rel="stylesheet">
+    <link href="<?= base_url('/Assets/lumino/css/datepicker3.css'); ?>" rel="stylesheet">
+    <link href="<?= base_url('/Assets/lumino/css/styles.css'); ?>" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -54,37 +57,23 @@
         ul li a.active {
             background-color: #ddd;
         }
-    </style>
 
-    <link href="../../public/Assets/lumino/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../public/Assets/lumino/css/datepicker3.css" rel="stylesheet">
-    <link href="../../public/Assets/lumino/css/styles.css" rel="stylesheet">
+        table.table thead th,
+        table.table tbody td {
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 
 <body>
     <?= view('template/sidebar'); ?>
-
     <div class="content expanded">
         <?= $this->renderSection('content'); ?>
     </div>
 
-    <script>
-        // Script to toggle sidebar collapse
-        document.querySelector('.navbar-toggle').addEventListener('click', function() {
-            const sidebar = document.getElementById('sidebar-collapse');
-            const content = document.querySelector('.content');
-
-            if (sidebar.classList.contains('collapsed')) {
-                sidebar.classList.remove('collapsed');
-                content.classList.remove('collapsed');
-                content.classList.add('expanded');
-            } else {
-                sidebar.classList.add('collapsed');
-                content.classList.remove('expanded');
-                content.classList.add('collapsed');
-            }
-        });
-    </script>
+    <script src="<?= base_url('/Assets/lumino/js/jquery-1.11.1.min.js'); ?>"></script>
+    <script src="<?= base_url('/Assets/lumino/js/bootstrap.min.js'); ?>"></script>
 </body>
 
 </html>

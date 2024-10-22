@@ -2,9 +2,13 @@
 
 <?= $this->section('content'); ?>
 <h1>Unit Management</h1>
-<a href="<?= base_url('admin/create_unit'); ?>">Add New Unit</a>
-<table>
-    <thead>
+<div>
+    <a href="<?= base_url('admin/create_unit'); ?>" class="btn btn-primary">Add New Unit</a>
+</div>
+<br>
+
+<table class="table table-bordered">
+    <thead class="thead-dark">
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -24,11 +28,11 @@
                 <td><?= $unit['unit_code']; ?></td>
                 <td><?= $unit['category_name']; ?></td>
                 <td><?= $unit['stock']; ?></td>
-                <td><?= number_format($unit['cost_rent_per_day'], 2); ?></td>
-                <td><?= number_format($unit['cost_rent_per_month'], 2); ?></td>
+                <td><?= number_format($unit['cost_rent_per_day'], 0); ?></td>
+                <td><?= number_format($unit['cost_rent_per_month'], 0); ?></td>
                 <td>
-                    <a href="<?= base_url('admin/edit_unit/' . $unit['id']); ?>">Edit</a>
-                    <a href="<?= base_url('admin/delete_unit/' . $unit['id']); ?>"
+                    <a href="<?= base_url('admin/edit_unit/' . $unit['id']); ?>" class="btn btn-primary">Edit</a>
+                    <a href="<?= base_url('admin/delete_unit/' . $unit['id']); ?>" class="btn btn-warning"
                         onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
             </tr>

@@ -35,13 +35,13 @@ class CreateUnitsTable extends Migration
             ],
             'cost_rent_per_day' => [
                 'type' => 'DECIMAL',
-                'constraint' => '10,2',
-                'default' => 0.00,
+                'constraint' => '15,0',
+                'default' => 0,
             ],
             'cost_rent_per_month' => [
                 'type' => 'DECIMAL',
-                'constraint' => '10,2',
-                'default' => 0.00,
+                'constraint' => '15,0',
+                'default' => 0,
             ],
         ]);
         $this->forge->addKey('id', true);
