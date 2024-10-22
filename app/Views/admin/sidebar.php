@@ -6,10 +6,12 @@
     </form>
     <ul class="nav menu">
         <li class="active"><a href="index.html"><span class="glyphicon glyphicon-dashboard"></span> Dashboard</a></li>
-        <li><a href="widgets.html"><span class="glyphicon glyphicon-th"></span> Widgets</a></li>
-        <li><a href="charts.html"><span class="glyphicon glyphicon-stats"></span> Charts</a></li>
-        <li><a href="tables.html"><span class="glyphicon glyphicon-list-alt"></span> Tables</a></li>
-        <li><a href="forms.html"><span class="glyphicon glyphicon-pencil"></span> Forms</a></li>
+        <li><a href="<?= base_url('admin/users'); ?>"><span class="glyphicon glyphicon-th"></span> Master User</a></li>
+        <li><a href="<?= base_url('admin/categories'); ?>"><span class="glyphicon glyphicon-stats"></span> Master Category</a></li>
+        <li><a href="<?= base_url('admin/units'); ?>"><span class="glyphicon glyphicon-stats"></span> Master Unit</a></li>
+        <li><a href="<?= base_url('admin/rental_history'); ?>"><span class="glyphicon glyphicon-list-alt"></span> Rental History</a></li>
+        <li><a href="<?= base_url('admin/policies'); ?>"><span class="glyphicon glyphicon-pencil"></span> Policy Penalties and Fees</a></li>
+        <li><a href="<?= base_url('admin/database-management'); ?>"><span class="glyphicon glyphicon-pencil"></span> Database Management</a></li>
         <li><a href="panels.html"><span class="glyphicon glyphicon-info-sign"></span> Alerts &amp; Panels</a></li>
         <li class="parent ">
             <a href="#">
