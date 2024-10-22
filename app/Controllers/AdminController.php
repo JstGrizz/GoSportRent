@@ -171,4 +171,50 @@ class AdminController extends BaseController
         $data['rentals'] = $model->getDetailedRentals();
         return view('admin/rental_history', $data);
     }
+
+    public function policies()
+    {
+        $model = new \App\Models\PolicyModel();
+        $data['policies'] = $model->findAll();
+        return view('admin/policies', $data);
+    }
+
+    public function createPolicy()
+    {
+        return view('admin/create_policy');
+    }
+
+    public function storePolicy()
+    {
+        $model = new \App\Models\PolicyModel();
+        $model->save([
+            'max_rental_days' => $this->request->getPost('max_rental_days'),
+            'overdue_fee_per_day' => $this->request->getPost('overdue_fee_per_day')
+        ]);
+        return redirect()->to('/admin/policies');
+    }
+
+    public function editPolicy($id)
+    {
+        $model = new \App\Models\PolicyModel();
+        $data['policy'] = $model->find($id);
+        return view('admin/edit_policy', $data);
+    }
+
+    public function updatePolicy($id)
+    {
+        $model = new \App\Models\PolicyModel();
+        $model->update($id, [
+            'max_rental_days' => $this->request->getPost('max_rental_days'),
+            'overdue_fee_per_day' => $this->request->getPost('overdue_fee_per_day')
+        ]);
+        return redirect()->to('/admin/policies');
+    }
+
+    public function deletePolicy($id)
+    {
+        $model = new \App\Models\PolicyModel();
+        $model->delete($id);
+        return redirect()->to('/admin/policies');
+    }
 }

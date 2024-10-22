@@ -7,11 +7,24 @@ class UnitSeeder extends \CodeIgniter\Database\Seeder
     public function run()
     {
         $data = [
-            ['name' => 'Raket Tennis', 'unit_code' => 'RT001', 'category_id' => 2],
-            ['name' => 'Bola Kaki', 'unit_code' => 'BK001', 'category_id' => 1]
+            [
+                'name' => 'Raket Tennis',
+                'unit_code' => 'RT001',
+                'category_id' => 2,
+                'stock' => 15,
+                'cost_rent_per_day' => 50.00,
+                'cost_rent_per_month' => 1500.00,
+            ],
+            [
+                'name' => 'Bola Kaki',
+                'unit_code' => 'BK001',
+                'category_id' => 1,
+                'stock' => 30,
+                'cost_rent_per_day' => 30.00,
+                'cost_rent_per_month' => 900.00,
+            ],
         ];
 
-        // Using Query Builder
         $this->db->table('units')->insertBatch($data);
     }
 }
