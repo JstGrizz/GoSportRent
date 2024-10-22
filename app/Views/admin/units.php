@@ -10,22 +10,28 @@
             <th>Name</th>
             <th>Unit Code</th>
             <th>Category</th>
+            <th>Stock</th>
+            <th>Cost Per Day</th>
+            <th>Cost Per Month</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($units as $unit): ?>
-        <tr>
-            <td><?= $unit['id']; ?></td>
-            <td><?= $unit['name']; ?></td>
-            <td><?= $unit['unit_code']; ?></td>
-            <td><?= $unit['category_name']; ?></td>
-            <td>
-                <a href="<?= base_url('admin/edit_unit/' . $unit['id']); ?>">Edit</a>
-                <a href="<?= base_url('admin/delete_unit/' . $unit['id']); ?>"
-                    onclick="return confirm('Are you sure?')">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td><?= $unit['id']; ?></td>
+                <td><?= $unit['name']; ?></td>
+                <td><?= $unit['unit_code']; ?></td>
+                <td><?= $unit['category_name']; ?></td>
+                <td><?= $unit['stock']; ?></td>
+                <td><?= number_format($unit['cost_rent_per_day'], 2); ?></td>
+                <td><?= number_format($unit['cost_rent_per_month'], 2); ?></td>
+                <td>
+                    <a href="<?= base_url('admin/edit_unit/' . $unit['id']); ?>">Edit</a>
+                    <a href="<?= base_url('admin/delete_unit/' . $unit['id']); ?>"
+                        onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
         <?php endforeach; ?>
     </tbody>
 </table>

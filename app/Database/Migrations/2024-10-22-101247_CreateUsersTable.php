@@ -15,6 +15,10 @@ class CreateUsersTable extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
+            'name' => [  // Add this new field
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+            ],
             'username' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
@@ -43,7 +47,6 @@ class CreateUsersTable extends Migration
         $this->forge->addKey('id', true);
         $this->forge->createTable('users');
     }
-
 
     public function down()
     {
