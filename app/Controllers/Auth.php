@@ -25,7 +25,7 @@ class Auth extends BaseController
                 'role' => $user['role'],
                 'isLoggedIn' => true
             ]);
-            return redirect()->to(base_url('admin/dashboard'));
+            return redirect()->to(base_url('admin/users'));
         } else if ($user && $user['role'] === 'user') {
             $session->set([
                 'username' => $user['username'],
@@ -34,7 +34,7 @@ class Auth extends BaseController
             ]);
             return redirect()->to(base_url('dashboard'));
         } else {
-            return redirect()->back()->with('error', 'Username or Password is incorrect');
+            return redirect()->to(base_url('login'))->with('error', 'Username or Password is incorrect');
         }
     }
 
@@ -83,6 +83,6 @@ class Auth extends BaseController
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('/login');
+        return redirect()->to(base_url('login'));
     }
 }
