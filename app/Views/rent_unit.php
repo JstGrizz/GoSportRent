@@ -27,6 +27,23 @@
                         <div class="row justify-content-center">
                             <div class="col-md-6"> <!-- Menambahkan col-md-6 untuk menjaga lebar card lebih kecil -->
                                 <div class="card">
+                                    <?php if (session()->getFlashdata('error')): ?>
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <?= session()->getFlashdata('error'); ?>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (session()->getFlashdata('success')): ?>
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <?= session()->getFlashdata('success'); ?>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    <?php endif; ?>
                                     <div class="card-header bg-primary text-white text-center">
                                         <h2 class="card-title">Rent Unit: <?= esc($unit['name']); ?></h2>
                                     </div>

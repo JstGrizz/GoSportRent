@@ -25,10 +25,21 @@
                             <?php foreach ($units as $unit): ?>
                                 <div class="col-md-4">
                                     <?php if (session()->getFlashdata('error')): ?>
-                                        <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <?= session()->getFlashdata('error'); ?>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
                                     <?php endif; ?>
+
                                     <?php if (session()->getFlashdata('success')): ?>
-                                        <p style="color: green;"><?= session()->getFlashdata('success') ?></p>
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <?= session()->getFlashdata('success'); ?>
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
                                     <?php endif; ?>
                                     <div class="card card-custom shadow-sm">
                                         <div class="card-body text-center" style="padding: 20px;">
