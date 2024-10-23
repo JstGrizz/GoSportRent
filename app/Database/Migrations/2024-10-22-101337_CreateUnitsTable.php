@@ -43,12 +43,16 @@ class CreateUnitsTable extends Migration
                 'constraint' => '15,0',
                 'default' => 0,
             ],
+            'image' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'null' => true, // Make it nullable if the image is optional
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('category_id', 'categories', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('units');
     }
-
 
     public function down()
     {

@@ -200,14 +200,36 @@ class AdminController extends BaseController
             return redirect()->to(base_url('/login'));
         }
 
+        helper('text');  // Load the text helper
+
         $model = new UnitModel();
+        $img = $this->request->getFile('image');
+        $newImageName = '';
+        $targetPath = FCPATH . 'Assets/image/';
+
+        if ($img->isValid() && !$img->hasMoved()) {
+            $newImageName = $img->getRandomName();
+            $img->move($targetPath, $newImageName);
+        }
+
+        // Auto Generate Unit Code
+        $unique = false;
+        $unitCode = '';
+        while (!$unique) {
+            $unitCode = bin2hex(random_bytes(2));
+            if (!$model->where('unit_code', $unitCode)->first()) {
+                $unique = true;
+            }
+        }
+
         $model->save([
             'name' => $this->request->getPost('name'),
-            'unit_code' => $this->request->getPost('unit_code'),
+            'unit_code' => $unitCode,
             'category_id' => $this->request->getPost('category_id'),
             'stock' => $this->request->getPost('stock'),
             'cost_rent_per_day' => $this->request->getPost('cost_rent_per_day'),
-            'cost_rent_per_month' => $this->request->getPost('cost_rent_per_month')
+            'cost_rent_per_month' => $this->request->getPost('cost_rent_per_month'),
+            'image' => $newImageName
         ]);
         return redirect()->to('/admin/units');
     }
@@ -235,15 +257,34 @@ class AdminController extends BaseController
         }
 
         $model = new UnitModel();
-        $model->update($id, [
+
+        // Get the image from the request
+        $img = $this->request->getFile('image');
+
+        // Define the path where the image should be saved
+        $targetPath = FCPATH . 'Assets/image/';
+
+        if ($img->isValid() && !$img->hasMoved()) {
+            $newName = $img->getRandomName();
+            $img->move($targetPath, $newName);
+        }
+
+        $updateData = [
             'name' => $this->request->getPost('name'),
             'unit_code' => $this->request->getPost('unit_code'),
             'category_id' => $this->request->getPost('category_id'),
             'stock' => $this->request->getPost('stock'),
             'cost_rent_per_day' => $this->request->getPost('cost_rent_per_day'),
-            'cost_rent_per_month' => $this->request->getPost('cost_rent_per_month')
-        ]);
-        return redirect()->to('/admin/units');
+            'cost_rent_per_month' => $this->request->getPost('cost_rent_per_month'),
+            'image' => $newName
+        ];
+
+        // Update the unit with new data
+        if ($model->update($id, $updateData)) {
+            return redirect()->to('/admin/units')->with('success', 'Unit updated successfully.');
+        } else {
+            return redirect()->to('/admin/units')->with('error', 'Failed to update the unit.');
+        }
     }
 
 

@@ -45,6 +45,8 @@ $routes->post('admin/store_policy', 'AdminController::storePolicy');
 $routes->get('admin/edit_policy/(:num)', 'AdminController::editPolicy/$1');
 $routes->post('admin/update_policy/(:num)', 'AdminController::updatePolicy/$1');
 $routes->get('admin/delete_policy/(:num)', 'AdminController::deletePolicy/$1');
+
+
 $routes->get('unit_list', 'UserController::viewUnits');
 $routes->get('rent_unit/(:num)', 'UserController::rentUnit/$1');
 $routes->post('process_rental', 'UserController::processRental');

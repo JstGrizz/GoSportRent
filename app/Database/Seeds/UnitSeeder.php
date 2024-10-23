@@ -14,6 +14,7 @@ class UnitSeeder extends \CodeIgniter\Database\Seeder
                 'stock' => 15,
                 'cost_rent_per_day' => 50.00,
                 'cost_rent_per_month' => 1500.00,
+                'image' => 'path/to/tennis_racket_image.jpg',
             ],
             [
                 'name' => 'Bola Kaki',
@@ -22,6 +23,7 @@ class UnitSeeder extends \CodeIgniter\Database\Seeder
                 'stock' => 30,
                 'cost_rent_per_day' => 30.00,
                 'cost_rent_per_month' => 900.00,
+                'image' => 'path/to/football_image.jpg',
             ],
         ];
 
