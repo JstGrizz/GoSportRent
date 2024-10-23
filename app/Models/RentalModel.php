@@ -33,7 +33,7 @@ class RentalModel extends Model
 
     public function getUserRentals($userId)
     {
-        return $this->select('rentals.*, units.name as unit_name, units.unit_code')
+        return $this->select('rentals.*, units.name as unit_name, units.unit_code, units.image')
             ->join('units', 'units.id = rentals.unit_id')
             ->where('user_id', $userId)
             ->findAll();
@@ -56,15 +56,5 @@ class RentalModel extends Model
     public function updateRentalStatus($rentalId, $status)
     {
         return $this->update($rentalId, ['status_rent' => $status]);
-    }
-
-    public function countUserRentals($userId)
-    {
-        return $this->where('user_id', $userId)->countAllResults();
-    }
-
-    public function updatePaymentStatus($rentalId, $status)
-    {
-        return $this->update($rentalId, ['status_paid' => $status]);
     }
 }

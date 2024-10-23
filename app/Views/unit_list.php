@@ -37,6 +37,8 @@
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm card-custom">
                     <div class="card-body">
+                        <img src="<?= base_url('/Assets/image/' . $unit['image']); ?>"
+                            alt="Image of <?= esc($unit['name']); ?>" style="width: 100px; height: auto;">
                         <h5 class="card-title"><?= esc($unit['name']); ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted">Unit Code: <?= esc($unit['unit_code']); ?></h6>
                         <p class="card-text">Category: <?= esc($unit['category_name']); ?></p>
