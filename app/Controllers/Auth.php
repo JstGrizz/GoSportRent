@@ -21,6 +21,7 @@ class Auth extends BaseController
 
         if ($user && $user['role'] === 'admin') {
             $session->set([
+                'id' => $user['id'],
                 'username' => $user['username'],
                 'role' => $user['role'],
                 'isLoggedIn' => true
@@ -28,6 +29,7 @@ class Auth extends BaseController
             return redirect()->to(base_url('admin/users'));
         } else if ($user && $user['role'] === 'user') {
             $session->set([
+                'id' => $user['id'],
                 'username' => $user['username'],
                 'role' => $user['role'],
                 'isLoggedIn' => true
@@ -51,7 +53,7 @@ class Auth extends BaseController
 
         // Check if user or email already exists
         if ($model->where('username', $username)->first() || $model->where('email', $email)->first()) {
-            return redirect()->to(base_url('register'))->with('error', 'Username or Email already exists');;     
+            return redirect()->to(base_url('register'))->with('error', 'Username or Email already exists');;
         }
 
         // Save user details
