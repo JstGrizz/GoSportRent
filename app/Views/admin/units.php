@@ -32,7 +32,7 @@
                 <td><?= number_format($unit['cost_rent_per_day'], 0); ?></td>
                 <td><?= number_format($unit['cost_rent_per_month'], 0); ?></td>
                 <td><img src="<?= base_url('/Assets/image/' . $unit['image']); ?>" alt="Image of <?= esc($unit['name']); ?>"
-                        style="width: 100px; height: auto;"></td>
+                        style="width: 300px; height: auto;"></td>
                 <td>
                     <a href="<?= base_url('admin/edit_unit/' . $unit['id']); ?>" class="btn btn-warning">Edit</a>
                     <a href="<?= base_url('admin/delete_unit/' . $unit['id']); ?>" class="btn btn-danger"

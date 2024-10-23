@@ -2,17 +2,17 @@
 
 <?= $this->section('content'); ?>
 <style>
-    .card {
-        background: none;
-        border: none;
-        box-shadow: none;
-    }
+.card {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
 
 
-    .col-md-8 {
-        margin-left: auto;
+.col-md-8 {
+    margin-left: auto;
 
-    }
+}
 </style>
 
 <div class="container mt-5">
@@ -24,13 +24,6 @@
                 </div>
                 <div class="card-body">
                     <form action="<?= base_url('process_rental'); ?>" method="post">
-                        <input type="hidden" name="unit_id" value="<?= esc($unit['id']); ?>">
-
-                        <div class="form-group">
-                            <label for="duration">Duration:</label>
-                            <input type="number" class="form-control" id="duration" name="duration" required min="1" placeholder="Enter rental duration">
-                        </div>
-
                         <div class="form-group">
                             <label for="type">Rental Type:</label>
                             <select class="form-control" id="type" name="type">
@@ -38,6 +31,18 @@
                                 <option value="month">Per Month</option>
                             </select>
                         </div>
+                        <input type="hidden" name="unit_id" value="<?= esc($unit['id']); ?>">
+                        <div class="form-group">
+                            <label for="stock">Amount Unit:</label>
+                            <input type="number" class="form-control" id="amount" name="amount" required min="1"
+                                placeholder="Enter amount unit">
+                        </div>
+                        <div class="form-group">
+                            <label for="duration">Duration:</label>
+                            <input type="number" class="form-control" id="duration" name="duration" required min="1"
+                                placeholder="Enter rental duration">
+                        </div>
+
 
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary mt-3">Submit Rental Request</button>
