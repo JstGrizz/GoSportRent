@@ -57,4 +57,12 @@ class RentalModel extends Model
     {
         return $this->update($rentalId, ['status_rent' => $status]);
     }
+
+    public function getPendingRentals()
+    {
+        return $this->select('rentals.id, users.name as user_name, rentals.status_rent')
+            ->join('users', 'users.id = rentals.user_id')
+            ->whereIn('rentals.status_rent', ['waiting_approval', 'waiting_return'])
+            ->findAll();
+    }
 }

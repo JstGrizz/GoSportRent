@@ -23,11 +23,22 @@
 <body class="page-top">
     <div id="wrapper">
         <?= view('template/sidebar'); ?>
-        <div class="content expanded">
-            <?= $this->renderSection('content'); ?>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <?= $this->renderSection('content'); ?>
+            </div>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <span class="text-center my-auto">Copyright &copy; Your Website 2020</span>
+                </div>
+            </footer>
         </div>
-
+        <!-- End of Content Wrapper -->
     </div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/vendor/jquery/jquery.min.js'); ?>"></script>
     <script

@@ -16,14 +16,6 @@
     <div class="sidebar-heading">
         Master Data
     </div>
-
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
-    </li>
-
     <?php if (session()->get('role') === 'admin'): ?>
         <li class="nav-item">
             <a class="nav-link" href="<?= base_url('admin/users'); ?>">
