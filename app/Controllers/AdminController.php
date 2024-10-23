@@ -338,19 +338,23 @@ class AdminController extends BaseController
         }
 
         $model = new RentalModel();
-        $currentStatus = $model->where('id', $id)->first()['status_rent'];
+        $rental = $model->where('id', $id)->first();
+        $currentStatus = $rental['status_rent'];
         $newStatus = $this->request->getPost('status_rent');
-        $updateData = [
-            'status_rent' => $newStatus
-        ];
+        $updateData = ['status_rent' => $newStatus];
 
-        // Check status transition to set the appropriate fields
+
         if ($currentStatus === 'waiting_approval' && $newStatus === 'rented') {
             $updateData['approved_rent_by'] = session()->get('id');
             $updateData['rental_date'] = date("Y-m-d");
         } elseif ($currentStatus === 'waiting_return' && $newStatus === 'returned') {
             $updateData['approved_return_by'] = session()->get('id');
             $updateData['return_date'] = date("Y-m-d");
+        } elseif ($newStatus === 'rejected') {
+            $updateData['rejected_by'] = session()->get('id');
+            if ($rental['status_paid'] === 'paid') {
+                $updateData['status_paid'] = 'refunded';
+            }
         }
 
         if ($model->update($id, $updateData)) {

@@ -13,8 +13,10 @@ class RentalSeeder extends \CodeIgniter\Database\Seeder
                 'rental_date' => '2024-01-01',
                 'days_rented' => 5,
                 'cost' => 500.00,
+                'amount' => 2,
                 'status_rent' => 'rented',
                 'status_paid' => 'unpaid',
+                'approved_rent_by' => 1
             ],
         ];
 
