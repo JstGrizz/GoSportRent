@@ -19,6 +19,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        <a href="<?= base_url('admin/add_user'); ?>" class="btn btn-primary">Delete</a>
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"
                             style="text-align: center;">
                             <thead>
