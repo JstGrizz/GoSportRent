@@ -18,7 +18,7 @@ class UnitController extends BaseController
         if (empty($results)) {
             return view('search_results', ['results' => [], 'query' => $query]);
         }
-        echo " search_resul";
+
         return view('search_results', ['results' => $results, 'query' => $query]);
     }
 }

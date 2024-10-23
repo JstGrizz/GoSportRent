@@ -31,9 +31,12 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <ul class="nav menu">
         <?php if (session()->get('role') === 'admin'): ?>
-            <form role="search">
+            <!-- Form Pencarian untuk Admin -->
+            <form role="search" action="<?= base_url('search_results'); ?>" method="get">
                 <div class="form-group">
+                    <input type="text" name="query" class="form-control" placeholder="Search...">
                 </div>
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
             </form>
             <li><a href="<?= base_url('admin/users'); ?>">Master User</a></li>
             <li><a href="<?= base_url('admin/categories'); ?>">Master Category</a></li>
@@ -41,9 +44,12 @@
             <li><a href="<?= base_url('admin/rental_history'); ?>">Rental History</a></li>
             <li><a href="<?= base_url('admin/policies'); ?>">Policy Penalties and Fees</a></li>
         <?php else: ?>
-            <form role="search">
+            <!-- Form Pencarian untuk User -->
+            <form role="search" action="<?= base_url('search_results'); ?>" method="get">
                 <div class="form-group">
+                    <input type="text" name="query" class="form-control" placeholder="Search...">
                 </div>
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
             </form>
             <li><a href="<?= base_url('my_rentals'); ?>">My Rentals</a></li>
             <li><a href="<?= base_url('unit_list'); ?>">Browse Units</a></li>
