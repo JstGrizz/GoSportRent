@@ -24,11 +24,17 @@
                         <div class="row">
                             <?php foreach ($units as $unit): ?>
                                 <div class="col-md-4">
+                                    <?php if (session()->getFlashdata('error')): ?>
+                                        <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
+                                    <?php endif; ?>
+                                    <?php if (session()->getFlashdata('success')): ?>
+                                        <p style="color: green;"><?= session()->getFlashdata('success') ?></p>
+                                    <?php endif; ?>
                                     <div class="card card-custom shadow-sm">
                                         <div class="card-body text-center" style="padding: 20px;">
                                             <img src="<?= base_url('/Assets/image/' . $unit['image']); ?>"
                                                 alt="Image of <?= esc($unit['name']); ?>" class="mx-auto d-block mb-2"
-                                                style="width: 100px; height: auto; border-radius: 50%;">
+                                                style="width: 200px; height: auto; border-radius: 50%;">
                                             <!-- Circular and centered image -->
                                             <h5 class="card-title"><?= esc($unit['name']); ?></h5>
                                             <h6 class="card-subtitle mb-1 text-muted">Unit Code:

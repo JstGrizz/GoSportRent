@@ -109,9 +109,15 @@ class UserController extends BaseController
         $unitModel = new UnitModel();
         $rentalModel = new RentalModel();
 
+        $userId = session()->get('id');
         $unitId = $this->request->getPost('unit_id');
         $duration = $this->request->getPost('duration');
         $type = $this->request->getPost('type');
+
+        $ongoingRentalsCount = $rentalModel->countOngoingRentals($userId);
+        if ($ongoingRentalsCount >= 2) {
+            return redirect()->to('unit_list')->with('error', 'The User Already Reached Limit For Renting (2 max)');
+        }
 
         $unit = $unitModel->getUnitDetails($unitId);
         if ($unit['stock'] < 1) {
@@ -121,7 +127,7 @@ class UserController extends BaseController
         $cost = $type === 'day' ? $unit['cost_rent_per_day'] * $duration : $unit['cost_rent_per_month'] * $duration;
 
         $rentalData = [
-            'user_id' => session()->get('id'),
+            'user_id' => $userId,
             'unit_id' => $unitId,
             'days_rented' => $type === 'day' ? $duration : $duration * 30,
             'cost' => $cost,
@@ -171,13 +177,15 @@ class UserController extends BaseController
         $interval = $rentalDate->diff($today);
         $daysRented = $interval->days;
 
-        $updateData = ['status_rent' => 'waiting_return'];
+        $updateData = [
+            'status_rent' => 'waiting_return',
+            'cost' => $rental['cost']
+        ];
 
         if ($daysRented > $policy['max_rental_days']) {
             $overdueDays = $daysRented - $policy['max_rental_days'];
             $overdueFee = $overdueDays * $policy['overdue_fee_per_day'];
-            $updateData['status_paid'] = 'due';
-            // Optionally update cost to include the overdue fee
+            $updateData['status_paid'] = 'paid_with_fee';
             $updateData['cost'] += $overdueFee;
         }
 

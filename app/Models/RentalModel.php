@@ -71,4 +71,11 @@ class RentalModel extends Model
     {
         return $this->update($rentalId, ['status_paid' => $status]);
     }
+
+    public function countOngoingRentals($userId)
+    {
+        return $this->where('user_id', $userId)
+            ->where('return_date', null)
+            ->countAllResults();
+    }
 }
