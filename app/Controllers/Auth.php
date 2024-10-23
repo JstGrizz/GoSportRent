@@ -53,7 +53,7 @@ class Auth extends BaseController
 
         // Check if user or email already exists
         if ($model->where('username', $username)->first() || $model->where('email', $email)->first()) {
-            return redirect()->to(base_url('register'))->with('error', 'Username or Email already exists');;
+            return redirect()->to(base_url('register'))->with('error', 'Username or Email already exists');
         }
 
         // Save user details
@@ -66,9 +66,7 @@ class Auth extends BaseController
 
         $model->save($data);
 
-        // Set success message and redirect to login
-        $_SESSION['success'] = 'Registration successful. Please log in.';
-        return redirect()->to(base_url('login'));
+        return redirect()->to(base_url('login'))->with('success', 'Registration successful. Please log in.');
     }
 
 

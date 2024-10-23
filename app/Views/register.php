@@ -2,58 +2,97 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>Register</title>
-    <link href="../public/Assets/lumino/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../public/Assets/lumino/css/datepicker3.css" rel="stylesheet">
-    <link href="../public/Assets/lumino/css/styles.css" rel="stylesheet">
+
+    <link href="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/vendor/fontawesome-free/css/all.min.css'); ?>"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/css/sb-admin-2.min.css'); ?>" rel="stylesheet">
 
 </head>
 
-<body>
-    <div class="row">
-        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form role="form" action="<?= base_url('auth/register') ?>" method="post">
-                        <fieldset>
-                            <?php if (session()->getFlashdata('error')): ?>
-                            <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
-                            <?php endif; ?>
+<body class="bg-gradient-primary">
 
-                            <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" name="username" id="username" class="form-control"
-                                    value="<?= old('username') ?>" required>
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control"
-                                    value="<?= old('email') ?>" required>
+                            <form class="user" role="form" action="<?= base_url('auth/register') ?>" method="post">
+                                <div class="form-group">
+                                    <?php if (session()->getFlashdata('error')): ?>
+                                        <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
+                                    <?php endif; ?>
+                                    <?php if (session()->getFlashdata('success')): ?>
+                                        <p style="color: green;"><?= session()->getFlashdata('success') ?></p>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="text" name="username" id="username"
+                                            class="form-control form-control-user" value="<?= old('username') ?>"
+                                            placeholder="Enter Username" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="email" name="email" id="email"
+                                            class="form-control form-control-user" value="<?= old('email') ?>"
+                                            placeholder="Enter Email" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" name="password" id="password"
+                                            class="form-control form-control-user" placeholder="Password" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" name="confirm_password" id="confirm_password"
+                                            class="form-control form-control-user" placeholder="Repeat Password"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">Register</button>
+                                </div>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="<?= base_url('login') ?>">Already have an account? Login!</a>
                             </div>
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" name="password" id="password" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="confirm_password">Confirm Password</label>
-                                <input type="password" name="confirm_password" id="confirm_password"
-                                    class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block">Register</button>
-                            </div>
-                            <div class="form-group text-center">
-                                <p>Already have an account? <a href="<?= base_url('login') ?>">Login Here</a></p>
-                            </div>
-                        </fieldset>
-                    </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/vendor/jquery/jquery.min.js'); ?>"></script>
+    <script
+        src="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>">
+    </script>
+
+    <!-- Core plugin JavaScript-->
+    <script
+        src="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/vendor/jquery-easing/jquery.easing.min.js'); ?>">
+    </script>
+    <script src="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/js/sb-admin-2.min.js'); ?>"></script>
+
 </body>
 
 </html>

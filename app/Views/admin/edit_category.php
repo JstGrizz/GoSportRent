@@ -1,19 +1,44 @@
 <?= $this->extend('template/admin_layout'); ?>
 
 <?= $this->section('content'); ?>
-<div class="container">
-    <h1>Edit Category</h1>
-    <div class="row">
-        <div class="col-md-6">
-            <form action="<?= base_url('admin/update_category/' . $category['id']); ?>" method="post">
-                <div class="form-group">
-                    <label for="name">Category Name:</label>
-                    <input type="text" name="name" id="name" value="<?= $category['name']; ?>" required
-                        class="form-control">
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <?= view('template/topbar'); ?>
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <h1 class="h3 mb-2 text-gray-800">Edit Category</h1>
+            <div class="row">
+                <div class="col-lg-6">
+
                 </div>
-                <button type="submit" class="btn btn-primary">Update Category</button>
-            </form>
+            </div>
+            <div class="card shadow mb-4">
+                <!-- Basic Card Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <form action="<?= base_url('admin/update_category/' . $category['id']); ?>" method="post">
+                            <div class="form-group">
+                                <label for="name">Category Name:</label>
+                                <input type="text" name="name" id="name" value="<?= $category['name']; ?>" required
+                                    class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Category</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- /.container-fluid -->
+
     </div>
+    <!-- End of Main Content -->
+
 </div>
+<!-- End of Content Wrapper -->
 <?= $this->endSection(); ?>
