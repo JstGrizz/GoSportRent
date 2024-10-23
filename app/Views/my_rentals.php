@@ -1,17 +1,41 @@
 <?= $this->extend('template/user_layout'); ?>
 
 <?= $this->section('content'); ?>
-<<<<<<< HEAD
+
 <div class="container mt-5">
     <h1 class="text-center mb-4">My Rentals</h1>
+
+    <style>
+        .table {
+            background-color: #fff;
+        }
+
+        .table td,
+        .table th {
+            padding: 15px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .badge-success {
+            background-color: #28a745;
+        }
+
+        .badge-secondary {
+            background-color: #6c757d;
+        }
+
+        .badge-danger {
+            background-color: #dc3545;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+        }
+    </style>
+
     <table class="table table-striped table-hover table-bordered">
         <thead class="thead-dark">
-=======
-<div class="container">
-    <h1>My Rentals</h1>
-    <table class="table">
-        <thead>
->>>>>>> 985bef4b26b61e27601777a9cef1a81d10de4a00
             <tr>
                 <th>Unit Name</th>
                 <th>Unit Code</th>
@@ -31,31 +55,21 @@
                     <td><?= esc($rental['rental_date']); ?></td>
                     <td><?= esc($rental['days_rented']); ?></td>
                     <td><?= esc($rental['cost']); ?></td>
-<<<<<<< HEAD
                     <td>
                         <span class="badge badge-<?= $rental['status_rent'] === 'active' ? 'success' : 'secondary'; ?>">
-                            <?= esc($rental['status_rent']); ?>
+                            <?= esc($rental['status_rent'] ?: 'Unknown'); ?>
                         </span>
                     </td>
                     <td>
                         <span class="badge badge-<?= $rental['status_paid'] === 'paid' ? 'success' : 'danger'; ?>">
-                            <?= esc($rental['status_paid']); ?>
+                            <?= esc($rental['status_paid'] ?: 'Not Paid'); ?>
                         </span>
                     </td>
                     <td>
                         <?php if ($rental['status_paid'] !== 'paid'): ?>
                             <a href="<?= base_url('pay_rental/' . $rental['id']); ?>" class="btn btn-success btn-sm">Pay</a>
-=======
-                    <td><?= esc($rental['status_rent']); ?></td>
-                    <td><?= esc($rental['status_paid']); ?></td>
-                    <td>
-                        <?php if ($rental['status_paid'] !== 'paid'): ?>
-                            <a href="<?= base_url('pay_rental/' . $rental['id']); ?>" class="btn btn-success">Pay</a>
-                        <?php endif; ?>
-                        <?php if ($rental['status_rent'] === 'rented'): ?>
-                            <a href="<?= base_url('return_rental/' . $rental['id']); ?>" class="btn btn-info"
-                                onclick="return confirm('Are you sure you want to return this item?')">Return</a>
->>>>>>> 985bef4b26b61e27601777a9cef1a81d10de4a00
+                        <?php else: ?>
+                            <span class="badge badge-success">Paid</span>
                         <?php endif; ?>
                     </td>
                 </tr>
@@ -63,4 +77,5 @@
         </tbody>
     </table>
 </div>
+
 <?= $this->endSection(); ?>
