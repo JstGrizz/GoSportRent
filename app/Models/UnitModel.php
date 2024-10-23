@@ -16,7 +16,12 @@ class UnitModel extends Model
     public function fetchUnitsWithCategory()
     {
         $this->select('units.*, categories.name AS category_name');
-        $this->join('categories', 'units.category_id = categories.id', 'left');
+        $this->join('categories', 'units.category_id = categories.id');
         return $this->findAll();
+    }
+
+    public function getUnitDetails($id)
+    {
+        return $this->find($id);
     }
 }

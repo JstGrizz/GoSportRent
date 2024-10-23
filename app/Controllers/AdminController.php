@@ -297,11 +297,26 @@ class AdminController extends BaseController
         }
 
         $model = new RentalModel();
-        $data = [
-            'status_rent' => $this->request->getPost('status_rent')
+        $currentStatus = $model->where('id', $id)->first()['status_rent'];
+        $newStatus = $this->request->getPost('status_rent');
+        $updateData = [
+            'status_rent' => $newStatus
         ];
-        $model->update($id, $data);
-        return redirect()->to('/admin/rental_history');
+
+        // Check status transition to set the appropriate fields
+        if ($currentStatus === 'waiting_approval' && $newStatus === 'rented') {
+            $updateData['approved_rent_by'] = session()->get('id');
+            $updateData['rental_date'] = date("Y-m-d");
+        } elseif ($currentStatus === 'waiting_return' && $newStatus === 'returned') {
+            $updateData['approved_return_by'] = session()->get('id');
+            $updateData['return_date'] = date("Y-m-d");
+        }
+
+        if ($model->update($id, $updateData)) {
+            return redirect()->to('/admin/rental_history')->with('success', 'Rental status updated successfully.');
+        } else {
+            return redirect()->to('/admin/rental_history')->with('error', 'Failed to update rental status.');
+        }
     }
 
     public function deleteRental($id)
