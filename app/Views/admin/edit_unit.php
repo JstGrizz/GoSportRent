@@ -5,7 +5,8 @@
     <h1>Edit Unit</h1>
     <div class="row">
         <div class="col-md-6">
-            <form action="<?= base_url('admin/update_unit/' . $unit['id']); ?>" method="post">
+            <form action="<?= base_url('admin/update_unit/' . $unit['id']); ?>" method="post"
+                enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Unit Name:</label>
                     <input type="text" name="name" id="name" value="<?= $unit['name']; ?>" required
@@ -13,8 +14,8 @@
                 </div>
                 <div class="form-group">
                     <label for="unit_code">Unit Code:</label>
-                    <input type="text" name="unit_code" id="unit_code" value="<?= $unit['unit_code']; ?>" required
-                        class="form-control">
+                    <input class="form-control" type="text" name="unit_code" id="unit_code"
+                        value="<?= $unit['unit_code']; ?>" readonly>
                 </div>
                 <div class="form-group">
                     <label for="category_id">Category:</label>
@@ -41,6 +42,10 @@
                     <label for="cost_rent_per_month">Cost Rent per Month:</label>
                     <input type="text" name="cost_rent_per_month" id="cost_rent_per_month"
                         value="<?= $unit['cost_rent_per_month']; ?>" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="image">Unit Image:</label>
+                    <input type="file" name="image" id="image" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">Update Unit</button>
             </form>
