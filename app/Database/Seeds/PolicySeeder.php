@@ -11,7 +11,6 @@ class PolicySeeder extends \CodeIgniter\Database\Seeder
             'overdue_fee_per_day' => 100000, // bayar Rp100.0000 per hari
         ];
 
-        // Using Query Builder
         $this->db->table('policies')->insert($data);
     }
 }
