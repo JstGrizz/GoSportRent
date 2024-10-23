@@ -30,6 +30,10 @@
                         <?php if ($rental['status_paid'] !== 'paid'): ?>
                             <a href="<?= base_url('pay_rental/' . $rental['id']); ?>" class="btn btn-success">Pay</a>
                         <?php endif; ?>
+                        <?php if ($rental['status_rent'] === 'rented'): ?>
+                            <a href="<?= base_url('return_rental/' . $rental['id']); ?>" class="btn btn-info"
+                                onclick="return confirm('Are you sure you want to return this item?')">Return</a>
+                        <?php endif; ?>
                     </td>
                 </tr>
             <?php endforeach; ?>

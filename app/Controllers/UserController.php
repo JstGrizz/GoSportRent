@@ -6,6 +6,8 @@ use App\Models\UnitModel;
 
 use App\Models\RentalModel;
 
+use App\Models\PolicyModel;
+
 class UserController extends BaseController
 {
     public function index()
@@ -150,5 +152,37 @@ class UserController extends BaseController
         } else {
             return redirect()->to('my_rentals')->with('error', 'Payment failed');
         }
+    }
+
+    public function returnRental($id)
+    {
+        $model = new RentalModel();
+        $rental = $model->find($id);
+
+        if (!$rental || $rental['user_id'] !== session()->get('id')) {
+            return redirect()->to('my_rentals')->with('error', 'Invalid rental record.');
+        }
+
+        $policyModel = new PolicyModel();
+        $policy = $policyModel->first();
+
+        $rentalDate = new \DateTime($rental['rental_date']);
+        $today = new \DateTime();
+        $interval = $rentalDate->diff($today);
+        $daysRented = $interval->days;
+
+        $updateData = ['status_rent' => 'waiting_return'];
+
+        if ($daysRented > $policy['max_rental_days']) {
+            $overdueDays = $daysRented - $policy['max_rental_days'];
+            $overdueFee = $overdueDays * $policy['overdue_fee_per_day'];
+            $updateData['status_paid'] = 'due';
+            // Optionally update cost to include the overdue fee
+            $updateData['cost'] += $overdueFee;
+        }
+
+        $model->update($id, $updateData);
+
+        return redirect()->to('my_rentals')->with('success', 'Return initiated successfully. Please wait for admin approval.');
     }
 }

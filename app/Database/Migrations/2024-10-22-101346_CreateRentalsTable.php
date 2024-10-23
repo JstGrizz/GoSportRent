@@ -37,7 +37,7 @@ class CreateRentalsTable extends Migration
             ],
             'cost' => [
                 'type' => 'DECIMAL',
-                'constraint' => '10,2',
+                'constraint' => '15,0',
                 'null' => true,
             ],
             'status_rent' => [
