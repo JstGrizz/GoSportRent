@@ -21,20 +21,22 @@ class Auth extends BaseController
 
         if ($user && $user['role'] === 'admin') {
             $session->set([
+                'id' => $user['id'],
                 'username' => $user['username'],
                 'role' => $user['role'],
                 'isLoggedIn' => true
             ]);
-            return redirect()->to(base_url('admin/dashboard'));
+            return redirect()->to(base_url('admin/users'));
         } else if ($user && $user['role'] === 'user') {
             $session->set([
+                'id' => $user['id'],
                 'username' => $user['username'],
                 'role' => $user['role'],
                 'isLoggedIn' => true
             ]);
-            return redirect()->to(base_url('dashboard'));
+            return redirect()->to(base_url('user_profile'));
         } else {
-            return redirect()->back()->with('error', 'Username or Password is incorrect');
+            return redirect()->to(base_url('login'))->with('error', 'Username or Password is incorrect');
         }
     }
 
@@ -49,19 +51,9 @@ class Auth extends BaseController
         $password = $this->request->getVar('password');
         $confirmPassword = $this->request->getVar('confirm_password');
 
-        // Validation username and email
-        if (empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
-            $_SESSION['error'] = 'All fields are required';
-            return redirect()->back();
-        } else if ($password !== $confirmPassword) {
-            $_SESSION['error'] = 'Passwords do not match';
-            return redirect()->back();
-        }
-
         // Check if user or email already exists
-        else if ($model->where('username', $username)->first() || $model->where('email', $email)->first()) {
-            $_SESSION['error'] = 'Username or Email already exists';
-            return redirect()->to(base_url('register'));
+        if ($model->where('username', $username)->first() || $model->where('email', $email)->first()) {
+            return redirect()->to(base_url('register'))->with('error', 'Username or Email already exists');;
         }
 
         // Save user details
@@ -83,6 +75,6 @@ class Auth extends BaseController
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('/login');
+        return redirect()->to(base_url('login'));
     }
 }

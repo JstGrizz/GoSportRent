@@ -2,26 +2,35 @@
 
 namespace App\Database\Seeds;
 
-class UserSeeder extends \CodeIgniter\Database\Seeder
+use CodeIgniter\Database\Seeder;
+
+class UserSeeder extends Seeder
 {
     public function run()
     {
+        $model = model('App\Models\UserModel');
+
         $data = [
             [
-                'username' => 'admin',
-                'email' => 'admin@gmail.com',
-                'password' => password_hash('admin123', PASSWORD_DEFAULT),
-                'role' => 'admin'
+                'name'      => 'Khalid',
+                'username'  => 'admin',
+                'email'     => 'admin@example.com',
+                'password'  => password_hash('admin123', PASSWORD_DEFAULT),
+                'role'      => 'admin',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
             ],
             [
-                'username' => 'user',
-                'email' => 'user@gmail.com',
-                'password' => password_hash('user123', PASSWORD_DEFAULT),
-                'role' => 'user'
+                'name'      => 'Farhan',
+                'username'  => 'user',
+                'email'     => 'user@example.com',
+                'password'  => password_hash('user123', PASSWORD_DEFAULT),
+                'role'      => 'user',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
             ]
         ];
 
-        // Using Query Builder
         $this->db->table('users')->insertBatch($data);
     }
 }

@@ -13,26 +13,42 @@ class CreateUnitsTable extends Migration
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
-                'auto_increment' => true
+                'auto_increment' => true,
             ],
             'name' => [
                 'type' => 'VARCHAR',
-                'constraint' => '100'
+                'constraint' => '100',
             ],
             'unit_code' => [
                 'type' => 'VARCHAR',
                 'constraint' => '50',
-                'unique' => true
+                'unique' => true,
             ],
             'category_id' => [
                 'type' => 'INT',
-                'unsigned' => true
-            ]
+                'unsigned' => true,
+            ],
+            'stock' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => 0,
+            ],
+            'cost_rent_per_day' => [
+                'type' => 'DECIMAL',
+                'constraint' => '15,0',
+                'default' => 0,
+            ],
+            'cost_rent_per_month' => [
+                'type' => 'DECIMAL',
+                'constraint' => '15,0',
+                'default' => 0,
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('category_id', 'categories', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('units');
     }
+
 
     public function down()
     {

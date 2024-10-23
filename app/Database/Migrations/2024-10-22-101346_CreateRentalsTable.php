@@ -13,35 +13,59 @@ class CreateRentalsTable extends Migration
                 'type' => 'INT',
                 'constraint' => 11,
                 'unsigned' => true,
-                'auto_increment' => true
+                'auto_increment' => true,
             ],
             'user_id' => [
                 'type' => 'INT',
                 'unsigned' => true,
-                'null' => false
             ],
             'unit_id' => [
                 'type' => 'INT',
                 'unsigned' => true,
-                'null' => false
             ],
             'rental_date' => [
                 'type' => 'DATE',
-                'null' => false
             ],
             'return_date' => [
                 'type' => 'DATE',
-                'null' => false
+                'null' => true,
             ],
-            'status' => [
+            'days_rented' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => 0,
+            ],
+            'cost' => [
+                'type' => 'DECIMAL',
+                'constraint' => '15,0',
+                'null' => true,
+            ],
+            'status_rent' => [
                 'type' => 'ENUM',
-                'constraint' => ['rented', 'returned'],
-                'default' => 'rented'
-            ]
+                'constraint' => ['waiting_approval', 'rented', 'waiting_return', 'returned'],
+                'default' => 'waiting_approval',
+            ],
+            'status_paid' => [
+                'type' => 'ENUM',
+                'constraint' => ['unpaid', 'paid', 'paid_with_fee'],
+                'default' => 'unpaid',
+            ],
+            'approved_rent_by' => [
+                'type' => 'INT',
+                'unsigned' => true,
+                'null' => true,
+            ],
+            'approved_return_by' => [
+                'type' => 'INT',
+                'unsigned' => true,
+                'null' => true,
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('unit_id', 'units', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('approved_rent_by', 'users', 'id', 'SET NULL', 'CASCADE');
+        $this->forge->addForeignKey('approved_return_by', 'users', 'id', 'SET NULL', 'CASCADE');
         $this->forge->createTable('rentals');
     }
 
