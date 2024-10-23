@@ -34,7 +34,7 @@ class Auth extends BaseController
                 'role' => $user['role'],
                 'isLoggedIn' => true
             ]);
-            return redirect()->to(base_url('dashboard'));
+            return redirect()->to(base_url('user_profile'));
         } else {
             return redirect()->to(base_url('login'))->with('error', 'Username or Password is incorrect');
         }
