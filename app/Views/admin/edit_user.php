@@ -21,9 +21,6 @@
             <div class="card shadow mb-4">
                 <!-- Basic Card Example -->
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Form Edit User</h6>
-                    </div>
                     <div class="card-body">
                         <form action="<?= base_url('admin/update_user/' . $user['id']); ?>" method="post">
                             <div class="form-group">
