@@ -25,12 +25,15 @@
                             <?php foreach ($units as $unit): ?>
                                 <div class="col-md-4">
                                     <div class="card card-custom shadow-sm">
-                                        <div class="card-body">
+                                        <div class="card-body text-center" style="padding: 20px;">
                                             <img src="<?= base_url('/Assets/image/' . $unit['image']); ?>"
-                                                alt="Image of <?= esc($unit['name']); ?>" style="width: 100px; height: auto;">
+                                                alt="Image of <?= esc($unit['name']); ?>" class="mx-auto d-block mb-2"
+                                                style="width: 100px; height: auto; border-radius: 50%;">
+                                            <!-- Circular and centered image -->
                                             <h5 class="card-title"><?= esc($unit['name']); ?></h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Unit Code: <?= esc($unit['unit_code']); ?></h6>
-                                            <p class="card-text">Category: <?= esc($unit['category_name']); ?></p>
+                                            <h6 class="card-subtitle mb-1 text-muted">Unit Code:
+                                                <?= esc($unit['unit_code']); ?></h6>
+                                            <p class="card-text mb-1">Category: <?= esc($unit['category_name']); ?></p>
                                             <p class="card-text">
                                                 Stock:
                                                 <?php if ($unit['stock'] > 0): ?>
@@ -40,9 +43,12 @@
                                                 <?php endif; ?>
                                                 (<?= esc($unit['stock']); ?>)
                                             </p>
-                                            <p class="card-text">Cost per Day: <?= esc($unit['cost_rent_per_day']); ?></p>
-                                            <p class="card-text">Cost per Month: <?= esc($unit['cost_rent_per_month']); ?></p>
-                                            <a href="<?= base_url('rent_unit/' . $unit['id']); ?>" class="btn btn-primary btn-sm">
+                                            <p class="card-text mb-1">Cost per Day: <?= esc($unit['cost_rent_per_day']); ?>
+                                            </p>
+                                            <p class="card-text mb-3">Cost per Month:
+                                                <?= esc($unit['cost_rent_per_month']); ?></p>
+                                            <a href="<?= base_url('rent_unit/' . $unit['id']); ?>"
+                                                class="btn btn-primary btn-sm">
                                                 <i class="fas fa-shopping-cart"></i> Rent
                                             </a>
                                         </div>
@@ -50,6 +56,12 @@
                                 </div>
                             <?php endforeach; ?>
                         </div>
-                        <?= $this->endSection(); ?>
                     </div>
                 </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End of Content Wrapper -->
+<?= $this->endSection(); ?>

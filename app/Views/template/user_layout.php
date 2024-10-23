@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>GoSportRent</title>
+    <title>User Dashboard</title>
 
     <link href="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/vendor/fontawesome-free/css/all.min.css'); ?>"
         rel="stylesheet">
@@ -39,8 +39,6 @@
         <!-- End of Content Wrapper -->
     </div>
 
-    <script src="<?= base_url('/Assets/lumino/js/jquery-1.11.1.min.js'); ?>"></script>
-    <script src="<?= base_url('/Assets/lumino/js/bootstrap.min.js'); ?>"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/vendor/jquery/jquery.min.js'); ?>"></script>
     <script
@@ -60,7 +58,6 @@
     <!-- Page level custom scripts -->
     <script src="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/js/demo/chart-area-demo.js'); ?>"></script>
     <script src="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/js/demo/chart-pie-demo.js'); ?>"></script>
-
 
 </body>
 

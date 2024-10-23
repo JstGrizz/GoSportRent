@@ -65,4 +65,10 @@ class RentalModel extends Model
             ->whereIn('rentals.status_rent', ['waiting_approval', 'waiting_return'])
             ->findAll();
     }
+
+    // Update payment status
+    public function updatePaymentStatus($rentalId, $status)
+    {
+        return $this->update($rentalId, ['status_paid' => $status]);
+    }
 }
