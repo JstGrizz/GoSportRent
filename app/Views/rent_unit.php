@@ -8,7 +8,6 @@
         box-shadow: none;
     }
 
-
     .col-md-8 {
         margin-left: auto;
 

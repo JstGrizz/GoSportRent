@@ -3,8 +3,6 @@
 <?= $this->section('content'); ?>
 
 <div class="container mt-5">
-    <h1 class="text-center mb-4">My Rentals</h1>
-
     <style>
         .table {
             background-color: #fff;
@@ -21,16 +19,10 @@
             background-color: #28a745;
         }
 
-        .badge-secondary {
-            background-color: #6c757d;
         }
 
         .badge-danger {
             background-color: #dc3545;
-        }
-
-        .btn-sm {
-            padding: 5px 10px;
         }
     </style>
 

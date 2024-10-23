@@ -14,10 +14,6 @@ class UnitController extends BaseController
             ->orLike('unit_code', $query)
             ->findAll();
 
-        // Debugging untuk melihat hasil
-        if (empty($results)) {
-            return view('search_results', ['results' => [], 'query' => $query]);
-        }
 
         return view('search_results', ['results' => $results, 'query' => $query]);
     }

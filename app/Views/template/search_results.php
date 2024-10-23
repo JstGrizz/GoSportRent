@@ -1,4 +1,3 @@
-<!-- app/Views/search_results.php -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,10 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
-    <link href="Assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="<?= base_url('Assets/css/bootstrap.min.css') ?>" rel="stylesheet">
-
 </head>
 
 <body>
