@@ -9,9 +9,11 @@
             <ul class="user-menu">
                 <li class="dropdown pull-right">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                            class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
+                            class="glyphicon glyphicon-user"></span> <?= session()->get('username') ?? 'User'; ?> <span
+                            class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                        <li><a href="<?= base_url('user_profile'); ?>"><span class="glyphicon glyphicon-user"></span>
+                                Profile</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
                         <li><a href="<?= base_url('logout'); ?>"><span class="glyphicon glyphicon-log-out"></span>
                                 Logout</a></li>
