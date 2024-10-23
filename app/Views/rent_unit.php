@@ -2,17 +2,7 @@
 
 <?= $this->section('content'); ?>
 <style>
-.card {
-    background: none;
-    border: none;
-    box-shadow: none;
-}
 
-
-.col-md-8 {
-    margin-left: auto;
-
-}
 </style>
 
 <div class="container mt-5">

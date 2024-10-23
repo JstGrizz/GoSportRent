@@ -2,38 +2,7 @@
 
 <?= $this->section('content'); ?>
 <h1 class="text-center mb-4">Available Units</h1>
-<style>
-    body {
-        background-color: #f4f4f9;
-    }
-
-    .container {
-        margin-top: 100px;
-    }
-
-    .card-custom {
-        background-color: #f8f9fa;
-        border: 1px solid #dee2e6;
-        border-radius: 15px;
-        transition: transform 0.2s ease-in-out;
-        text-align: center;
-
-    }
-
-    .card-custom:hover {
-        transform: translateY(-10px);
-
-    }
-
-    .card .btn {
-        margin-top: 10px;
-
-    }
-</style>
-
-<div class="container">
-    <div class="row">
-        <?php foreach ($units as $unit): ?>
+            <?php foreach ($units as $unit): ?>
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm card-custom">
                     <div class="card-body">
