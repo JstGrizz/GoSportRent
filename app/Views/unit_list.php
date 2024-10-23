@@ -1,7 +1,6 @@
 <?= $this->extend('template/user_layout'); ?>
 
 <?= $this->section('content'); ?>
-
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
@@ -12,9 +11,6 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-            <h1 class="h3 mb-2 text-gray-800">Available</h1>
-            <div class="row">
-                <div class="col-lg-6">
 
                 </div>
             </div>
