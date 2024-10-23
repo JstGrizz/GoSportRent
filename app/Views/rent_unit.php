@@ -8,6 +8,7 @@
         box-shadow: none;
     }
 
+
     .col-md-8 {
         margin-left: auto;
 
@@ -46,4 +47,5 @@
             </div>
         </div>
     </div>
+
     <?= $this->endSection(); ?>
