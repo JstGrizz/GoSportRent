@@ -10,7 +10,6 @@
 
         <?= view('template/topbar'); ?>
 
-        <!-- Begin Page Content -->
         <div class="container-fluid">
 
             <h1 class="h3 mb-2 text-gray-800">My Rentals</h1>
