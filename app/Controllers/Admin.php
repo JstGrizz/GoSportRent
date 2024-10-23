@@ -11,9 +11,9 @@ class Admin extends BaseController
 
     public function dashboard(): string
     {
-        return view('admin/header');
-        return view('admin/sidebar');
-        return view('admin/dashboard');
-        return view('admin/footer');
+        return view('admin/header')
+            . view('admin/sidebar')
+            . view('login/dashboard')
+            . view('admin/footer');
     }
 }
