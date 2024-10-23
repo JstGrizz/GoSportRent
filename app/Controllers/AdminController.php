@@ -34,6 +34,38 @@ class AdminController extends BaseController
         return view('admin/users', $data);
     }
 
+    public function createUser()
+    {
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
+        return view('admin/create_user');
+    }
+
+
+    public function storeUser()
+    {
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
+            return redirect()->to(base_url('/login'));
+        }
+
+        $model = new UserModel();
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'username' => $this->request->getPost('username'),
+            'email' => $this->request->getPost('email'),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'role' => $this->request->getPost('role')
+        ];
+
+        if ($model->save($data)) {
+            return redirect()->to(base_url('admin/users'))->with('success', 'User successfully added');
+        } else {
+            return redirect()->to(base_url('admin/create_user'))->with('error', 'Failed to add user');
+        }
+    }
+
     public function editUser($id)
     {
         // Check if user is logged in and is an admin
@@ -76,23 +108,6 @@ class AdminController extends BaseController
         return redirect()->to('/admin/users');
     }
 
-    public function createUser()
-    {
-        // Check if user is logged in and is an admin
-        if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
-            return redirect()->to(base_url('/login'));
-        }
-
-        $model = new UserModel();
-        $data = [
-            'username' => $this->request->getPost('username'),
-            'email' => $this->request->getPost('email'),
-            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'role' => $this->request->getPost('role')
-        ];
-        $model->save($data);
-        return redirect()->to('/admin/users');
-    }
 
     public function categories()
     {
