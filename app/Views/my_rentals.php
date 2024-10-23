@@ -25,12 +25,6 @@
                         <div class="row">
                             <?php foreach ($rentals as $rental): ?>
                                 <div class="col-md-4">
-                                    <?php if (session()->getFlashdata('error')): ?>
-                                        <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
-                                    <?php endif; ?>
-                                    <?php if (session()->getFlashdata('success')): ?>
-                                        <p style="color: green;"><?= session()->getFlashdata('success') ?></p>
-                                    <?php endif; ?>
                                     <div class="card card-custom shadow-sm">
                                         <div class="card-body text-center">
                                             <img src="<?= base_url('/Assets/image/' . $rental['image']); ?>"
