@@ -44,8 +44,13 @@
                                     class="form-control" disabled>
                             </div>
                             <div class="form-group">
+                                <label for="cost">Amount:</label>
+                                <input type="text" id="amount" value="<?= number_format($rental['amount'], 0); ?>"
+                                    class="form-control" disabled>
+                            </div>
+                            <div class="form-group">
                                 <label for="cost">Cost:</label>
-                                <input type="text" id="cost" value="<?= number_format($rental['cost'], 2); ?>"
+                                <input type="text" id="cost" value="<?= number_format($rental['cost'], 0); ?>"
                                     class="form-control" disabled>
                             </div>
                             <div class="form-group">
@@ -66,6 +71,10 @@
                                     <option value="returned"
                                         <?= $rental['status_rent'] === 'returned' ? 'selected' : ''; ?>>
                                         Returned
+                                    </option>
+                                    <option value="rejected"
+                                        <?= $rental['status_rent'] === 'rejected' ? 'selected' : ''; ?>>
+                                        Rejected
                                     </option>
                                 </select>
                             </div>

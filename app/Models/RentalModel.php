@@ -15,6 +15,7 @@ class RentalModel extends Model
         'return_date',
         'days_rented',
         'cost',
+        'amount',
         'status_rent',
         'status_paid',
         'approved_rent_by',

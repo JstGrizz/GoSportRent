@@ -33,23 +33,23 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($users as $user): ?>
-                                <tr>
-                                    <td><?= $user['id']; ?></td>
-                                    <td><?= $user['name']; ?></td>
-                                    <td><?= $user['username']; ?></td>
-                                    <td><?= $user['email']; ?></td>
-                                    <td><?= $user['role']; ?></td>
-                                    <td>
-                                        <a href="<?= base_url('admin/edit_user/' . $user['id']); ?>"
-                                            class="btn btn-warning">Edit</a>
-                                        <a href="<?= base_url('admin/delete_user/' . $user['id']); ?>"
-                                            class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td><?= $user['id']; ?></td>
+                                        <td><?= $user['name']; ?></td>
+                                        <td><?= $user['username']; ?></td>
+                                        <td><?= $user['email']; ?></td>
+                                        <td><?= $user['role']; ?></td>
+                                        <td>
+                                            <a href="<?= base_url('admin/edit_user/' . $user['id']); ?>"
+                                                class="btn btn-warning">Edit</a>
+                                            <a href="<?= base_url('admin/delete_user/' . $user['id']); ?>"
+                                                class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
-                        <a href="<?= base_url('admin/add_user'); ?>" class="btn btn-primary">Add New User</a>
+                        <a href="<?= base_url('admin/create_user'); ?>" class="btn btn-primary">Add New User</a>
                     </div>
                 </div>
             </div>

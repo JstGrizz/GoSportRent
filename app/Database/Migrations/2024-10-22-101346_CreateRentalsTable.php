@@ -40,9 +40,14 @@ class CreateRentalsTable extends Migration
                 'constraint' => '15,0',
                 'null' => true,
             ],
+            'amount' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => 1,
+            ],
             'status_rent' => [
                 'type' => 'ENUM',
-                'constraint' => ['waiting_approval', 'rented', 'waiting_return', 'returned'],
+                'constraint' => ['waiting_approval', 'rented', 'waiting_return', 'returned', 'rejected'],
                 'default' => 'waiting_approval',
             ],
             'status_paid' => [
@@ -60,12 +65,18 @@ class CreateRentalsTable extends Migration
                 'unsigned' => true,
                 'null' => true,
             ],
+            'rejected_by' => [
+                'type' => 'INT',
+                'unsigned' => true,
+                'null' => true,
+            ]
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('user_id', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('unit_id', 'units', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('approved_rent_by', 'users', 'id', 'SET NULL', 'CASCADE');
         $this->forge->addForeignKey('approved_return_by', 'users', 'id', 'SET NULL', 'CASCADE');
+        $this->forge->addForeignKey('rejected_by', 'users', 'id', 'SET NULL', 'CASCADE');
         $this->forge->createTable('rentals');
     }
 

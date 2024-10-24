@@ -18,6 +18,10 @@ class UserController extends BaseController
 
     public function userProfile()
     {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to(base_url('/login'));
+        }
+
         $session = session();
         $userId = $session->get('id');  // Assuming user_id is stored in session
 
@@ -37,6 +41,10 @@ class UserController extends BaseController
 
     public function editProfile()
     {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to(base_url('/login'));
+        }
+
         $session = session();
         $userId = $session->get('id');
 
@@ -56,6 +64,11 @@ class UserController extends BaseController
 
     public function updateProfile()
     {
+
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to(base_url('/login'));
+        }
+
         $session = session();
         $userId = $session->get('id');
 
@@ -78,6 +91,10 @@ class UserController extends BaseController
 
     public function viewUnits()
     {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to(base_url('/login'));
+        }
+
         $model = new UnitModel();
         $data['units'] = $model->fetchUnitsWithCategory();
 
@@ -86,6 +103,12 @@ class UserController extends BaseController
 
     public function rentUnit($unitId)
     {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to(base_url('/login'));
+        }
+
+        $userId = session()->get('id');
+
         helper(['form']);
         $unitModel = new UnitModel();
         $rentalModel = new RentalModel();
@@ -95,41 +118,43 @@ class UserController extends BaseController
             return redirect()->back()->with('error', 'Unit not found.');
         }
 
-        // // Check if user has already rented 2 items
-        // if ($rentalModel->countUserRentals(session()->get('id')) >= 2) {
-        //     return redirect()->back()->with('error', 'You can only rent up to 2 units at a time.');
-        // }
+        $ongoingRentalsCount = $rentalModel->countOngoingRentals($userId);
+        if ($ongoingRentalsCount >= 2) {
+            return redirect()->to('unit_list')->with('error', 'You have already reached the limit for ongoing rentals (2 max).');
+        }
 
-        // Show rental form
         return view('rent_unit', ['unit' => $unit]);
     }
 
     public function processRental()
     {
+
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to(base_url('/login'));
+        }
+
+
         $unitModel = new UnitModel();
         $rentalModel = new RentalModel();
 
         $userId = session()->get('id');
         $unitId = $this->request->getPost('unit_id');
+        $amount = $this->request->getPost('amount');
         $duration = $this->request->getPost('duration');
         $type = $this->request->getPost('type');
 
-        $ongoingRentalsCount = $rentalModel->countOngoingRentals($userId);
-        if ($ongoingRentalsCount >= 2) {
-            return redirect()->to('unit_list')->with('error', 'The User Already Reached Limit For Renting (2 max)');
-        }
-
         $unit = $unitModel->getUnitDetails($unitId);
-        if ($unit['stock'] < 1) {
-            return redirect()->back()->with('error', 'This unit is currently out of stock.');
+        if ($unit['stock'] < $amount) {
+            return redirect()->back()->with('error', "This unit is currently out of stock or the requested amount exceeds available stock.");
         }
 
-        $cost = $type === 'day' ? $unit['cost_rent_per_day'] * $duration : $unit['cost_rent_per_month'] * $duration;
+        $cost = ($type === 'day' ? $unit['cost_rent_per_day'] : $unit['cost_rent_per_month']) * $duration * $amount;
 
         $rentalData = [
             'user_id' => $userId,
             'unit_id' => $unitId,
             'days_rented' => $type === 'day' ? $duration : $duration * 30,
+            'amount' => $amount,
             'cost' => $cost,
             'status_rent' => 'waiting_approval'
         ];
@@ -141,8 +166,14 @@ class UserController extends BaseController
         }
     }
 
+
     public function myRentals()
     {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to(base_url('/login'));
+        }
+
+
         $model = new RentalModel();
         $userId = session()->get('id');
         $data['rentals'] = $model->getUserRentals($userId);
@@ -152,6 +183,11 @@ class UserController extends BaseController
 
     public function payRental($rentalId)
     {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to(base_url('/login'));
+        }
+
+
         $model = new RentalModel();
         if ($model->updatePaymentStatus($rentalId, 'paid')) {
             return redirect()->to('my_rentals')->with('success', 'Payment successful');
@@ -162,6 +198,11 @@ class UserController extends BaseController
 
     public function returnRental($id)
     {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to(base_url('/login'));
+        }
+
+
         $model = new RentalModel();
         $rental = $model->find($id);
 
