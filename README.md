@@ -8,7 +8,7 @@
 
 ## Deskripsi Proyek
 
-Dashboard Peminjaman Alat Olahraga adalah sebuah antarmuka yang menyediakan visualisasi data terkait penggunaan dan peminjaman alat olahraga. Dashboard ini memungkinkan pengguna, baik admin maupun anggota, untuk mengelola dan memantau aktivitas peminjaman. Admin dapat melihat daftar alat yang sedang dipinjam, status stok alat, dan riwayat peminjaman oleh anggota. Pengguna dapat memeriksa ketersediaan alat, biaya sewa per hari atau per bulan, dan melakukan peminjaman dengan mudah. Dashboard ini bertujuan untuk menyederhanakan proses peminjaman dan pelacakan alat olahraga.
+Dashboard Peminjaman Alat Olahraga 
 
 ## List Fitur
 
