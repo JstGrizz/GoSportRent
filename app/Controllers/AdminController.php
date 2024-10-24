@@ -101,11 +101,24 @@ class AdminController extends BaseController
         }
 
         $model = new UserModel();
+
+        $model = new UserModel();
+        $name = $this->request->getVar('name');
+        $username = $this->request->getVar('username');
+        $email = $this->request->getVar('email');
+        $role = $this->request->getVar('role');
+
+
+        if ($model->where('username', $username)->first() || $model->where('email', $email)->first()) {
+            return redirect()->to(base_url('admin/edit_user/' . $id))->with('error', 'Username or Email already exists');
+        }
+
+
         $data = [
-            'name' => $this->request->getPost('name'),
-            'username' => $this->request->getPost('username'),
-            'email' => $this->request->getPost('email'),
-            'role' => $this->request->getPost('role')
+            'name' => $name,
+            'username' => $username,
+            'email' => $email,
+            'role' => $role
         ];
         $model->update($id, $data);
         return redirect()->to('/admin/users');
@@ -186,6 +199,12 @@ class AdminController extends BaseController
         }
 
         $model = new CategoryModel();
+
+        $name = $this->request->getPost('name');
+
+        if ($model->where('name', $name)->first()) {
+            return redirect()->to(base_url('/admin/edit_category'))->with("error", "Name Category Can't be the same");
+        }
         $model->update($id, [
             'name' => $this->request->getPost('name')
         ]);
@@ -353,8 +372,14 @@ class AdminController extends BaseController
             $img->move($targetPath, $newName);
         }
 
+        $name = $this->request->getPost('name');
+
+        if ($unitModel->where('name', $name)->first()) {
+            return redirect()->to(base_url('/admin/create_unit'))->with("error", "Name Unit Can't be the same");
+        }
+
         $updateData = [
-            'name' => $this->request->getPost('name'),
+            'name' => $name,
             'unit_code' => $this->request->getPost('unit_code'),
             'stock' => $this->request->getPost('stock'),
             'cost_rent_per_day' => $this->request->getPost('cost_rent_per_day'),
