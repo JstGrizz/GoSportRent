@@ -2,35 +2,6 @@
 
 <?= $this->section('content'); ?>
 <!-- Content Wrapper -->
-
-<style>
-    /* Add this in your <head> inside a <style> tag or in an external CSS file */
-    .chip {
-        display: inline-block;
-        padding: 0 25px;
-        height: 35px;
-        font-size: 16px;
-        line-height: 35px;
-        border-radius: 18px;
-        background-color: #f1f1f1;
-        margin: 5px;
-        transition: background-color 0.3s, color 0.3s;
-        user-select: none;
-    }
-
-    .chip label {
-        cursor: pointer;
-    }
-
-    .chip input[type="checkbox"] {
-        display: none;
-    }
-
-    .chip input[type="checkbox"]:checked+label {
-        background-color: #007BFF;
-        color: white;
-    }
-</style>
 <div id="content-wrapper" class="d-flex flex-column">
 
     <!-- Main Content -->
@@ -47,7 +18,6 @@
                 </div>
             </div>
             <div class="card shadow mb-4">
-                <!-- Basic Card Example -->
                 <div class="card-body">
                     <form action="<?= base_url('admin/update_unit/' . $unit['id']); ?>" method="post"
                         enctype="multipart/form-data">
@@ -65,12 +35,12 @@
                             <label>Categories:</label>
                             <div class="chip-container">
                                 <?php foreach ($categories as $category): ?>
-                                    <div class="chip">
-                                        <input type="checkbox" id="cat-<?= $category['id']; ?>" name="category_ids[]"
-                                            value="<?= $category['id']; ?>"
-                                            <?= in_array($category['id'], array_column($selectedCategories, 'category_id')) ? 'checked' : ''; ?>>
-                                        <label for="cat-<?= $category['id']; ?>"><?= $category['name']; ?></label>
-                                    </div>
+                                <div class="chip" data-id="<?= $category['id']; ?>" onclick="toggleChip(this)">
+                                    <?= $category['name']; ?>
+                                    <input type="checkbox" id="cat-<?= $category['id']; ?>" name="category_ids[]"
+                                        value="<?= $category['id']; ?>" class="d-none"
+                                        <?= in_array($category['id'], array_column($selectedCategories, 'category_id')) ? 'checked' : ''; ?>>
+                                </div>
                                 <?php endforeach; ?>
                             </div>
                         </div>
@@ -105,27 +75,52 @@
 
 </div>
 <!-- End of Content Wrapper -->
-
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var chips = document.querySelectorAll('.chip input[type="checkbox"]');
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.chip').forEach(chip => {
+        const checkbox = document.querySelector(`#cat-${chip.dataset.id}`);
+        chip.classList.toggle('selected', checkbox.checked);
+    });
+});
 
-        chips.forEach(function(chip) {
-            chip.addEventListener('change', function() {
-                var label = this.nextElementSibling;
-                if (this.checked) {
-                    label.style.backgroundColor = '#007BFF';
-                    label.style.color = 'white';
-                } else {
-                    label.style.backgroundColor = '#f1f1f1';
-                    label.style.color = 'black';
-                }
-            });
+document.addEventListener('DOMContentLoaded', function() {
+    const chips = document.querySelectorAll('.chip');
+    chips.forEach(chip => {
+        chip.addEventListener('click', function() {
+            const checkbox = document.querySelector(`#cat-${this.dataset.id}`);
+            checkbox.checked = !checkbox.checked;
+            this.classList.toggle('selected', checkbox.checked);
         });
     });
+});
 </script>
+<style>
+.chip {
+    display: inline-block;
+    padding: 5px 15px;
+    margin: 2px 5px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
 
+.chip.selected {
+    background-color: #007bff;
+    color: white;
+}
 
+.chip label {
+    cursor: pointer;
+    display: block;
+}
 
-
+.chip input[type="checkbox"] {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    pointer-events: none;
+}
+</style>
 <?= $this->endSection(); ?>

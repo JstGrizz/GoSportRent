@@ -14,6 +14,13 @@ class UnitCategoryModel extends Model
 
     protected $returnType = 'array';
 
+    public function getCategoryIdsForUnit($unitId)
+    {
+        return $this->select('category_id')
+            ->where('unit_id', $unitId)
+            ->findAll();
+    }
+
     public function insertUnitCategories($unitId, array $categoryIds)
     {
         foreach ($categoryIds as $categoryId) {
@@ -21,9 +28,9 @@ class UnitCategoryModel extends Model
                 'unit_id' => $unitId,
                 'category_id' => $categoryId
             ];
-            // Insert each relationship entry into the database
+
             if (!$this->insert($data)) {
-                return false; // Return false if any insert fails
+                return false;
             }
         }
         return true;
@@ -34,12 +41,25 @@ class UnitCategoryModel extends Model
         return $this->where('unit_id', $unitId)->delete();
     }
 
-    public function updateUnitCategories($unitId, array $categoryIds)
+    public function updateUnitCategories($unitId, array $newCategoryIds)
     {
-        // First, remove existing relationships
-        $this->removeUnitCategories($unitId);
+        $existingCategories = $this->where('unit_id', $unitId)->findAll();
+        $existingCategoryIds = array_column($existingCategories, 'category_id');
 
-        // Then, add new relationships
-        return $this->insertUnitCategories($unitId, $categoryIds);
+        $toDelete = array_diff($existingCategoryIds, $newCategoryIds);
+        $toAdd = array_diff($newCategoryIds, $existingCategoryIds);
+
+        if (!empty($toDelete)) {
+            $this->where('unit_id', $unitId)
+                ->whereIn('category_id', $toDelete)
+                ->delete();
+        }
+
+        foreach ($toAdd as $categoryId) {
+            $this->insert([
+                'unit_id' => $unitId,
+                'category_id' => $categoryId
+            ]);
+        }
     }
 }
