@@ -66,3 +66,4 @@ Dashboard Peminjaman Alat Olahraga
 
 
 ## Screen Record Demo-Penjelasan Webiste
+https://drive.google.com/file/d/1IC56psbsXU2kaFvMhnClUSkRu_Vs10js/view?usp=sharing
