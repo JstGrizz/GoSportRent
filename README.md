@@ -2,43 +2,54 @@
 
 ## Anggota Kelompok
 
-\*Khalid Umar Saifullah
-
-\*Farhan Abdullah Rynold
+- Khalid Umar Saifullah
+- Farhan Abdullah Rynold
 
 ## Deskripsi Proyek
 
-Dashboard Peminjaman Alat Olahraga adalah sebuah antarmuka yang menyediakan visualisasi data terkait penggunaan dan peminjaman alat olahraga. Dashboard ini memungkinkan pengguna, baik admin maupun anggota, untuk mengelola dan memantau aktivitas peminjaman. Admin dapat melihat daftar alat yang sedang dipinjam, status stok alat, dan riwayat peminjaman oleh anggota. Pengguna dapat memeriksa ketersediaan alat, biaya sewa per hari atau per bulan, dan melakukan peminjaman dengan mudah. Dashboard ini bertujuan untuk menyederhanakan proses peminjaman dan pelacakan alat olahraga.
+Dashboard Peminjaman Alat Olahraga 
 
 ## List Fitur
 
 ## 1. Admin
 
-- **Login**
-- **Manage Users**
+**Login**
+**Manage Users**
   - View user list
-  - Edit user (name, username, email, role)
-  - Add, edit, delete users
-- **Manage Units**
+  - Edit user (name, username, email, role) | Validate Existing Username and email
+  - Add User | Validate Existing Username and email
+  - Delete User | Alert Confirmation
+**Manage Units**
   - View unit list
-  - Edit unit (name, category, stock, cost rent per day/month, image)
-  - Add new units
-- **Master Category**
+  - Edit unit (name, category, stock, cost rent per day/month, image) | Validate if there's existing name of unit
+  - Add new units | Validate if there's existing name of unit
+  - Delete Unit | Alert Confirmation
+**Master Category**
   - View category list
-  - Edit category (name)
-- **Rental History**
+  - Edit category (name) | Validate if there's existing category
+  - Add New Category | Validate if there's existing category
+  - Delete Category | Alert Confirmation
+**Rental History**
   - View rental history
-  - Edit history
-- **Policy Management**
+  - Approval Rentals | Waiting Approval, Rented, Waiting Returned, Returned, Rejected
+  - Delete Rental History | Alert Confirmation
+**Policy Management**
+- Viw List of Policy Max day Rented and Fee Overdue
+- Edit Policy
+- Delete Policy | Alert Confirmation
 
 ## 2. User
-
+- **Register**
+- input username, email, password | Validate if there's the same email or username
 - **Login**
+- Input Username and Password | Validate if the username or password is wrong
 - **Update Profile**
-- **My Rent**
-  - Pay, return, pay fee (checks for over-limit policy)
-- **Browse Units**
-  - View units, rent (validate ongoing rentals, per day/month, unit count, rental duration)
+- Edit Name and Email | Validate if there's the same email 
+**My Rent**
+  - Pay, return, pay fee (checks for over-limit policy) | Validate status paid (Unpaid, Paid, Refunded) | Validate status rent (waiting_approval, rented, waiting_return, returned, rejected)
+
+**Browse Units**
+  - View units, rent | Validate user can only rent no more than 2 unit, and user cant rent if the stock is 0 or the amount selected exceeded the stock
 
 ## Screen Capture Gambar Schema Project Dari Database
 
