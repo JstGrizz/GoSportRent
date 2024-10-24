@@ -57,9 +57,8 @@
                                             <?php endif; ?>
                                             (<?= esc($unit['stock']); ?>)
                                         </p>
-                                        <p class="card-text mb-1">Cost per Day: <?= esc($unit['cost_rent_per_day']); ?></p>
-                                        <p class="card-text mb-3">Cost per Month:
-                                            <?= esc($unit['cost_rent_per_month']); ?></p>
+                                        <p class="card-text mb-1">Cost per Day: Rp. <?= esc(number_format($unit['cost_rent_per_day'], 0, ',', '.')); ?></p>
+                                        <p class="card-text mb-3">Cost per Month: Rp. <?= esc(number_format($unit['cost_rent_per_month'], 0, ',', '.')); ?></p>
                                         <a href="<?= base_url('rent_unit/' . $unit['id']); ?>"
                                             class="btn btn-primary btn-sm">
                                             <i class="fas fa-shopping-cart"></i> Rent
