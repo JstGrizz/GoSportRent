@@ -15,21 +15,21 @@
             <h1 class="h3 mb-2 text-gray-800">Unit Management</h1>
             <!-- Flashdata Alert -->
             <?php if (session()->getFlashdata('success')): ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <?= session()->getFlashdata('success'); ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('success'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             <?php endif; ?>
 
             <?php if (session()->getFlashdata('error')): ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <?= session()->getFlashdata('error'); ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('error'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             <?php endif; ?>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -54,25 +54,25 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($units as $unit): ?>
-                                <tr>
-                                    <td><?= $unit['id']; ?></td>
-                                    <td><?= $unit['name']; ?></td>
-                                    <td><?= $unit['unit_code']; ?></td>
-                                    <td><?= $unit['category_names']; ?></td>
-                                    <!-- Adjusted to show multiple categories -->
-                                    <td><?= $unit['stock']; ?></td>
-                                    <td><?= number_format($unit['cost_rent_per_day'], 0); ?></td>
-                                    <td><?= number_format($unit['cost_rent_per_month'], 0); ?></td>
-                                    <td><img src="<?= base_url('/Assets/image/' . $unit['image']); ?>"
-                                            alt="Image of <?= esc($unit['name']); ?>"
-                                            style="width: 100px; height: auto;"></td>
-                                    <td>
-                                        <a href="<?= base_url('admin/edit_unit/' . $unit['id']); ?>"
-                                            class="btn btn-warning">Edit</a>
-                                        <a href="<?= base_url('admin/delete_unit/' . $unit['id']); ?>"
-                                            class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td><?= $unit['id']; ?></td>
+                                        <td><?= $unit['name']; ?></td>
+                                        <td><?= $unit['unit_code']; ?></td>
+                                        <td><?= $unit['category_names']; ?></td>
+                                        <!-- Adjusted to show multiple categories -->
+                                        <td><?= $unit['stock']; ?></td>
+                                        <td>Rp. <?= number_format($unit['cost_rent_per_day'], 0, ',', '.'); ?></td>
+                                        <td>Rp. <?= number_format($unit['cost_rent_per_month'], 0, ',', '.'); ?></td>
+                                        <td><img src="<?= base_url('/Assets/image/' . $unit['image']); ?>"
+                                                alt="Image of <?= esc($unit['name']); ?>"
+                                                style="width: 100px; height: auto;"></td>
+                                        <td>
+                                            <a href="<?= base_url('admin/edit_unit/' . $unit['id']); ?>"
+                                                class="btn btn-warning">Edit</a>
+                                            <a href="<?= base_url('admin/delete_unit/' . $unit['id']); ?>"
+                                                class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>

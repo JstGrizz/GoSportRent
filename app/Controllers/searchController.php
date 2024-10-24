@@ -21,7 +21,7 @@ class SearchController extends BaseController
 
         // Lakukan pencarian di database berdasarkan struktur tabel
         $results = $this->db->table('units')
-            ->select('id, name, unit_code, category_id, stock, cost_rent_per_day, cost_rent_per_month, image')
+            ->select('id, name, unit_code, stock, cost_rent_per_day, cost_rent_per_month, image')
             ->like('name', $searchQuery)
             ->get()
             ->getResultArray();

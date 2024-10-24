@@ -48,12 +48,11 @@
                                                     alt="<?= esc($result['name']); ?>"
                                                     style="width: 150px; height: auto; border-radius: 50%;">
                                                 <!-- Circular and centered image -->
-                                                <a href=" <?= base_url('unit/' . $result['unit_code']); ?>" class="list-group-item list-group-item-action">
+                                                <a href=" <?= base_url('unit/' . $result['id']); ?>" class="list-group-item list-group-item-action">
                                                     <div class="d-flex w-100 justify-content-between">
                                                         <h5 class="card-body text-center"><?= esc($result['name']); ?></h5>
                                                     </div>
                                                     <small>Kode Unit: <?= esc($result['unit_code']); ?></small>
-                                                    <p class="mb-1">Category ID: <?= esc($result['category_id']); ?></p>
                                                     <p class="mb-1">Stock:
                                                         <?php if ($result['stock'] > 0): ?>
                                                             <span class="badge badge-success">Available</span>
@@ -61,15 +60,14 @@
                                                             <span class="badge badge-danger">Out of Stock</span>
                                                         <?php endif; ?>
                                                         (<?= esc($result['stock']); ?>)
-                                                        <p class="mb-1">Cost per Day: Rp.<?= esc(number_format($result['cost_rent_per_day'], 0, ',', '.')); ?></p>
-                                                        <p class="mb-1">Cost per Month: Rp.
-                                                            <?= esc(number_format($result['cost_rent_per_month'], 0, ',', '.')); ?>
-                                                        </p>
-                                                        <a href="<?= base_url('rent_unit/' . $result['id']); ?>"
-                                                            class="btn btn-primary btn-sm">
-                                                            <i class="fas fa-shopping-cart"></i> Rent
-                                                        </a>
+                                                    </p>
+                                                    <p class="mb-1">Cost per Day: Rp.<?= esc(number_format($result['cost_rent_per_day'], 0, ',', '.')); ?></p>
+                                                    <p class="mb-1">Cost per Month: Rp.<?= esc(number_format($result['cost_rent_per_month'], 0, ',', '.')); ?></p>
+                                                    <a href="<?= base_url('rent_unit/' . $result['id']); ?>" class="btn btn-primary btn-sm">
+                                                        <i class="fas fa-shopping-cart"></i> Rent
+                                                    </a>
                                                 </a>
+
 
                                             </div>
                                         </div>
