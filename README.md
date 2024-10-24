@@ -43,6 +43,6 @@ Dashboard Peminjaman Alat Olahraga adalah sebuah antarmuka yang menyediakan visu
 
 ## Screen Capture Gambar Schema Project Dari Database
 
-![Deskripsi gambar](./image/db.jpg)
+![screen picture db](./image/db.jpg)
 
 ## Screen Record Demo-Penjelasan Webiste
