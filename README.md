@@ -45,13 +45,13 @@ Dashboard Peminjaman Alat Olahraga
 
 ## 2. User
 
-- **Register**
+**Register**
 - input username, email, password | Validate if there's the same email or username
   
-- **Login**
+**Login**
 - Input Username and Password | Validate if the username or password is wrong
   
-- **Update Profile**
+**Update Profile**
 - Edit Name and Email | Validate if there's the same email 
 
 **My Rent**
