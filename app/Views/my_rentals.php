@@ -59,7 +59,8 @@
                                             <p class="card-text">
                                                 <strong>Rental Date:</strong> <?= esc($rental['rental_date']); ?><br>
                                                 <strong>Days Rented:</strong> <?= esc($rental['days_rented']); ?><br>
-                                                <strong>Cost: Rp. </strong> <?= esc(number_format($rental['cost'], 0, ',', '.')); ?><br>
+                                                <strong>Cost: Rp. </strong>
+                                                <?= esc(number_format($rental['cost'], 0, ',', '.')); ?><br>
                                                 <strong>Amount:</strong> <?= esc($rental['amount'],); ?>
                                             </p>
                                             <p class="card-text">
@@ -75,7 +76,7 @@
                                                 </span>
                                             </p>
                                             <div class="text-center mt-3">
-                                                <?php if ($rental['status_paid'] !== 'paid'): ?>
+                                                <?php if ($rental['status_paid'] !== 'paid' && $rental['status_paid'] !== 'refunded'): ?>
                                                     <a href="<?= base_url('pay_rental/' . $rental['id']); ?>"
                                                         class="btn btn-success">Pay</a>
                                                 <?php endif; ?>
