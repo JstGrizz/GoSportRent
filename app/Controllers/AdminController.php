@@ -10,6 +10,8 @@ use App\Models\UnitModel;
 
 use App\Models\RentalModel;
 
+use App\Models\UnitCategoryModel;
+
 class AdminController extends BaseController
 {
     public function index()
@@ -207,14 +209,14 @@ class AdminController extends BaseController
         }
 
         $model = new UnitModel();
-        $data['units'] = $model->fetchUnitsWithCategory();
+        $data['units'] = $model->fetchUnitsWithCategories();
         return view('admin/units', $data);
     }
 
 
+
     public function createUnit()
     {
-        // Check if user is logged in and is an admin
         if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
             return redirect()->to(base_url('/login'));
         }
@@ -226,14 +228,15 @@ class AdminController extends BaseController
 
     public function storeUnit()
     {
-        // Check if user is logged in and is an admin
         if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
             return redirect()->to(base_url('/login'));
         }
 
+        $unitModel = new UnitModel();
+        $unitCategoryModel = new UnitCategoryModel();
+
         helper('text');  // Load the text helper
 
-        $model = new UnitModel();
         $img = $this->request->getFile('image');
         $newImageName = '';
         $targetPath = FCPATH . 'Assets/image/';
@@ -248,37 +251,77 @@ class AdminController extends BaseController
         $unitCode = '';
         while (!$unique) {
             $unitCode = bin2hex(random_bytes(2));
-            if (!$model->where('unit_code', $unitCode)->first()) {
+            if (!$unitModel->where('unit_code', $unitCode)->first()) {
                 $unique = true;
             }
         }
 
-        $model->save([
+        $unitId = $unitModel->insert([
             'name' => $this->request->getPost('name'),
             'unit_code' => $unitCode,
-            'category_id' => $this->request->getPost('category_id'),
             'stock' => $this->request->getPost('stock'),
             'cost_rent_per_day' => $this->request->getPost('cost_rent_per_day'),
             'cost_rent_per_month' => $this->request->getPost('cost_rent_per_month'),
             'image' => $newImageName
-        ]);
+        ], true);
+
+        // Handling category_ids input
+        $categoryIds = $this->request->getPost('category_ids') ?? []; // Default to an empty array if nothing is sent
+
+        foreach ($categoryIds as $categoryId) {
+            $unitCategoryModel->insert([
+                'unit_id' => $unitId,
+                'category_id' => $categoryId
+            ]);
+        }
+
         return redirect()->to('/admin/units');
     }
+
+    private function handleImageUpload()
+    {
+        $img = $this->request->getFile('image');
+        if ($img->isValid() && !$img->hasMoved()) {
+            $newImageName = $img->getRandomName();
+            $img->move(FCPATH . 'Assets/image/', $newImageName);
+            return $newImageName;
+        }
+        return '';  // Return empty string or handle as required
+    }
+
+    private function generateUniqueCode($model)
+    {
+        $unique = false;
+        $unitCode = '';
+        while (!$unique) {
+            $unitCode = bin2hex(random_bytes(2));
+            if (!$model->where('unit_code', $unitCode)->first()) {
+                $unique = true;
+            }
+        }
+        return $unitCode;
+    }
+
 
 
     public function editUnit($id)
     {
-        // Check if user is logged in and is an admin
         if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
             return redirect()->to(base_url('/login'));
         }
 
         $model = new UnitModel();
         $categoryModel = new CategoryModel();
-        $data['unit'] = $model->find($id);
+        $unitCategoryModel = new UnitCategoryModel();
+
+        $data['unit'] = $model->getUnitDetails($id);
         $data['categories'] = $categoryModel->findAll();
+        $data['selectedCategories'] = $unitCategoryModel->getCategoryIdsForUnit($id);  // This should return an array of category IDs
+
         return view('admin/edit_unit', $data);
     }
+
+
 
     public function updateUnit($id)
     {
@@ -287,13 +330,13 @@ class AdminController extends BaseController
             return redirect()->to(base_url('/login'));
         }
 
-        $model = new UnitModel();
+        $unitModel = new UnitModel();
+        $unitCategoryModel = new UnitCategoryModel();  // Ensure this model is properly defined and loaded
+        $currentUnit = $unitModel->find($id);
 
         // Get the image from the request
         $img = $this->request->getFile('image');
-        $currentUnit = $model->find($id);
-        $newName = $currentUnit['image'];
-
+        $newName = $currentUnit['image'];  // Default to existing image
 
         $targetPath = FCPATH . 'Assets/image/';
 
@@ -305,7 +348,6 @@ class AdminController extends BaseController
         $updateData = [
             'name' => $this->request->getPost('name'),
             'unit_code' => $this->request->getPost('unit_code'),
-            'category_id' => $this->request->getPost('category_id'),
             'stock' => $this->request->getPost('stock'),
             'cost_rent_per_day' => $this->request->getPost('cost_rent_per_day'),
             'cost_rent_per_month' => $this->request->getPost('cost_rent_per_month'),
@@ -313,7 +355,11 @@ class AdminController extends BaseController
         ];
 
         // Update the unit with new data
-        if ($model->update($id, $updateData)) {
+        if ($unitModel->update($id, $updateData)) {
+            // Handle the category updates
+            $newCategoryIds = $this->request->getPost('category_ids') ?? [];
+            $unitCategoryModel->updateUnitCategories($id, $newCategoryIds);
+
             return redirect()->to('/admin/units')->with('success', 'Unit updated successfully.');
         } else {
             return redirect()->to('/admin/units')->with('error', 'Failed to update the unit.');
