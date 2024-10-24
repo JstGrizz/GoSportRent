@@ -10,6 +10,7 @@
         <?= view('template/topbar'); ?>
 
         <div class="container-fluid">
+            <h2 class="h4 text-primary mb-3">Hasil Pencarian untuk: <?= esc($searchQuery); ?></h2>
             <!-- Flashdata Alert -->
             <?php if (session()->getFlashdata('error')): ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -33,14 +34,11 @@
 
                 </div>
             </div>
-
-            <!-- Basic Card Example -->
             <div class="card shadow mb-4">
+                <!-- Basic Card Example -->
                 <div class="card shadow mb-4">
                     <div class="card-body">
                         <div class="row">
-                            <h2 class="h4 text-primary mb-3">Hasil Pencarian untuk: <?= esc($searchQuery); ?></h2>
-
                             <?php if (count($results) > 0): ?>
                                 <?php foreach ($results as $result): ?>
                                     <div class="col-md-4">
@@ -48,18 +46,31 @@
                                             <div class="card-body text-center" style="padding: 20px;">
                                                 <img src="<?= base_url('/Assets/image/' . $result['image']); ?>"
                                                     alt="<?= esc($result['name']); ?>"
-                                                    style="width: 100px; height: auto;">
-                                                <a href="<?= base_url('unit/' . $result['unit_code']); ?>" class="list-group-item list-group-item-action">
+                                                    style="width: 150px; height: auto; border-radius: 50%;">
+                                                <!-- Circular and centered image -->
+                                                <a href=" <?= base_url('unit/' . $result['unit_code']); ?>" class="list-group-item list-group-item-action">
                                                     <div class="d-flex w-100 justify-content-between">
-                                                        <h5 class="mb-1"><?= esc($result['name']); ?></h5>
-                                                        <small>Kode Unit: <?= esc($result['unit_code']); ?></small>
+                                                        <h5 class="card-body text-center"><?= esc($result['name']); ?></h5>
                                                     </div>
+                                                    <small>Kode Unit: <?= esc($result['unit_code']); ?></small>
                                                     <p class="mb-1">Category ID: <?= esc($result['category_id']); ?></p>
-                                                    <p class="mb-1">Stock: <?= esc($result['stock']); ?></p>
-                                                    <p class="mb-1">Cost per Day: <?= esc($result['cost_rent_per_day']); ?></p>
-                                                    <p class="mb-1">Cost per Month: <?= esc($result['cost_rent_per_month']); ?></p>
-
+                                                    <p class="mb-1">Stock:
+                                                        <?php if ($result['stock'] > 0): ?>
+                                                            <span class="badge badge-success">Available</span>
+                                                        <?php else: ?>
+                                                            <span class="badge badge-danger">Out of Stock</span>
+                                                        <?php endif; ?>
+                                                        (<?= esc($result['stock']); ?>)
+                                                        <p class="mb-1">Cost per Day: Rp.<?= esc(number_format($result['cost_rent_per_day'], 0, ',', '.')); ?></p>
+                                                        <p class="mb-1">Cost per Month: Rp.
+                                                            <?= esc(number_format($result['cost_rent_per_month'], 0, ',', '.')); ?>
+                                                        </p>
+                                                        <a href="<?= base_url('rent_unit/' . $result['id']); ?>"
+                                                            class="btn btn-primary btn-sm">
+                                                            <i class="fas fa-shopping-cart"></i> Rent
+                                                        </a>
                                                 </a>
+
                                             </div>
                                         </div>
                                     </div>
