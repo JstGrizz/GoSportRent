@@ -1,6 +1,6 @@
 # GoSportRent
 
-## Anggota Kelompok
+## Anggota Kelompok Warmindo
 
 - Khalid Umar Saifullah
 - Farhan Abdullah Rynold
