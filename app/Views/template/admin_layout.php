@@ -59,6 +59,18 @@
     <script src="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/js/demo/chart-area-demo.js'); ?>"></script>
     <script src="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/js/demo/chart-pie-demo.js'); ?>"></script>
 
+
+    <!-- Page level plugins -->
+
+    <script
+        src="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/vendor/datatables/jquery.dataTables.min.js'); ?>">
+    </script>
+
+    <script
+        src="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/vendor/datatables/dataTables.bootstrap4.min.js'); ?>">
+    </script>
+    <!-- Page level custom scripts -->
+    <script src="<?= base_url('/Assets/startbootstrap-sb-admin-2-master/js/demo/datatables-demo.js'); ?>"></script>
 </body>
 
 </html>
