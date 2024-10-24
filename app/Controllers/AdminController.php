@@ -51,13 +51,25 @@ class AdminController extends BaseController
         }
 
         $model = new UserModel();
+        // Get input values
+        $username = $this->request->getVar('username');
+        $email = $this->request->getVar('email');
+        $password = $this->request->getVar('password');
+        $role = $this->request->getVar('role');
+
+        // Check if user or email already exists
+        if ($model->where('username', $username)->first() || $model->where('email', $email)->first()) {
+            return redirect()->to(base_url('admin/users'))->with('error', 'Username or Email already exists');
+        }
+
+        // Save user details
         $data = [
-            'name' => $this->request->getPost('name'),
-            'username' => $this->request->getPost('username'),
-            'email' => $this->request->getPost('email'),
-            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'role' => $this->request->getPost('role')
+            'username' => $username,
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'role' => $role
         ];
+
 
         if ($model->save($data)) {
             return redirect()->to(base_url('admin/users'))->with('success', 'User successfully added');
