@@ -119,9 +119,8 @@ class UserController extends BaseController
             return redirect()->back()->with('error', 'Unit not found.');
         }
 
-        $ongoingRentalsCount = $rentalModel->countOngoingRentals($userId);
-        if ($ongoingRentalsCount >= 2) {
-            return redirect()->to('unit_list')->with('error', 'You have already reached the limit for ongoing rentals (2 max).');
+        if ($unit['stock'] <= 0) {
+            return redirect()->to('unit_list')->with('error', 'Stock is empty.');
         }
 
         return view('rent_unit', ['unit' => $unit]);
@@ -145,11 +144,14 @@ class UserController extends BaseController
         $type = $this->request->getPost('type');
 
         $unit = $unitModel->getUnitDetails($unitId);
-        if ($unit['stock'] < $amount) {
-            return redirect()->back()->with('error', "This unit is currently out of stock or the requested amount exceeds available stock.");
-        }
 
         $cost = ($type === 'day' ? $unit['cost_rent_per_day'] : $unit['cost_rent_per_month']) * $duration * $amount;
+
+        if ($amount > 2) {
+            return redirect()->back()->with('error', "Can't Rent More Than Two");
+        } else if ($amount > $unit['stock']) {
+            return redirect()->back()->with('error', "Stock isn't enough");
+        }
 
         $rentalData = [
             'user_id' => $userId,

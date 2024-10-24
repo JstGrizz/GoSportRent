@@ -447,6 +447,8 @@ class AdminController extends BaseController
             $updateData['rejected_by'] = session()->get('id');
             if ($rental['status_paid'] === 'paid' && $currentStatus === 'waiting_approval') {
                 $updateData['status_paid'] = 'refunded';
+                $updateData['approved_rent_by'] = session()->get('id');
+                $updateData['rental_date'] = date("Y-m-d");
             }
         }
 

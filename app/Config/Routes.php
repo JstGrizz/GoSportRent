@@ -42,6 +42,7 @@ $routes->get('admin/delete_rental/(:num)', 'AdminController::deleteRental/$1');
 $routes->get('admin/policies', 'AdminController::policies');
 $routes->get('admin/create_policy', 'AdminController::createPolicy');
 $routes->post('admin/store_policy', 'AdminController::storePolicy');
+$routes->post('admin/store_policy', 'AdminController::storePolicy');
 $routes->get('admin/edit_policy/(:num)', 'AdminController::editPolicy/$1');
 $routes->post('admin/update_policy/(:num)', 'AdminController::updatePolicy/$1');
 $routes->get('admin/delete_policy/(:num)', 'AdminController::deletePolicy/$1');
