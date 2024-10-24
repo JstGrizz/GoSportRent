@@ -11,8 +11,6 @@ Dashboard Peminjaman Alat Olahraga adalah sebuah antarmuka yang menyediakan visu
 
 ## List Fitur
 
-# Admin & User Functionality Overview
-
 ## 1. Admin
 
 - **Login**
@@ -43,6 +41,6 @@ Dashboard Peminjaman Alat Olahraga adalah sebuah antarmuka yang menyediakan visu
 
 ## Screen Capture Gambar Schema Project Dari Database
 
-![screen picture db](./image/db.jpg)
+![screen picture db](./Asset/image/db.jpg)
 
 ## Screen Record Demo-Penjelasan Webiste
