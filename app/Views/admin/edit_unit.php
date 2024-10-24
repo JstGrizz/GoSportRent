@@ -13,6 +13,24 @@
         <div class="container-fluid">
 
             <h1 class="h3 mb-2 text-gray-800">Edit Unit</h1>
+            <!-- Flashdata Alert -->
+            <?php if (session()->getFlashdata('success')): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('success'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endif; ?>
+
+            <?php if (session()->getFlashdata('error')): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('error'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endif; ?>
             <div class="row">
                 <div class="col-lg-6">
                 </div>
@@ -35,12 +53,12 @@
                             <label>Categories:</label>
                             <div class="chip-container">
                                 <?php foreach ($categories as $category): ?>
-                                <div class="chip" data-id="<?= $category['id']; ?>" onclick="toggleChip(this)">
-                                    <?= $category['name']; ?>
-                                    <input type="checkbox" id="cat-<?= $category['id']; ?>" name="category_ids[]"
-                                        value="<?= $category['id']; ?>" class="d-none"
-                                        <?= in_array($category['id'], array_column($selectedCategories, 'category_id')) ? 'checked' : ''; ?>>
-                                </div>
+                                    <div class="chip" data-id="<?= $category['id']; ?>" onclick="toggleChip(this)">
+                                        <?= $category['name']; ?>
+                                        <input type="checkbox" id="cat-<?= $category['id']; ?>" name="category_ids[]"
+                                            value="<?= $category['id']; ?>" class="d-none"
+                                            <?= in_array($category['id'], array_column($selectedCategories, 'category_id')) ? 'checked' : ''; ?>>
+                                    </div>
                                 <?php endforeach; ?>
                             </div>
                         </div>
@@ -76,51 +94,51 @@
 </div>
 <!-- End of Content Wrapper -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.chip').forEach(chip => {
-        const checkbox = document.querySelector(`#cat-${chip.dataset.id}`);
-        chip.classList.toggle('selected', checkbox.checked);
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const chips = document.querySelectorAll('.chip');
-    chips.forEach(chip => {
-        chip.addEventListener('click', function() {
-            const checkbox = document.querySelector(`#cat-${this.dataset.id}`);
-            checkbox.checked = !checkbox.checked;
-            this.classList.toggle('selected', checkbox.checked);
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.chip').forEach(chip => {
+            const checkbox = document.querySelector(`#cat-${chip.dataset.id}`);
+            chip.classList.toggle('selected', checkbox.checked);
         });
     });
-});
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const chips = document.querySelectorAll('.chip');
+        chips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                const checkbox = document.querySelector(`#cat-${this.dataset.id}`);
+                checkbox.checked = !checkbox.checked;
+                this.classList.toggle('selected', checkbox.checked);
+            });
+        });
+    });
 </script>
 <style>
-.chip {
-    display: inline-block;
-    padding: 5px 15px;
-    margin: 2px 5px;
-    font-size: 14px;
-    text-align: center;
-    border-radius: 25px;
-    background-color: #f1f1f1;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
+    .chip {
+        display: inline-block;
+        padding: 5px 15px;
+        margin: 2px 5px;
+        font-size: 14px;
+        text-align: center;
+        border-radius: 25px;
+        background-color: #f1f1f1;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
 
-.chip.selected {
-    background-color: #007bff;
-    color: white;
-}
+    .chip.selected {
+        background-color: #007bff;
+        color: white;
+    }
 
-.chip label {
-    cursor: pointer;
-    display: block;
-}
+    .chip label {
+        cursor: pointer;
+        display: block;
+    }
 
-.chip input[type="checkbox"] {
-    position: absolute;
-    clip: rect(0, 0, 0, 0);
-    pointer-events: none;
-}
+    .chip input[type="checkbox"] {
+        position: absolute;
+        clip: rect(0, 0, 0, 0);
+        pointer-events: none;
+    }
 </style>
 <?= $this->endSection(); ?>
