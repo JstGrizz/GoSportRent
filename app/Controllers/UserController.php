@@ -77,24 +77,25 @@ class UserController extends BaseController
 
         $userModel = new \App\Models\UserModel();
         $newEmail = $this->request->getPost('email');
+        $newName = $this->request->getPost('name');
         $currentData = $userModel->find($userId);
 
         if ($newEmail !== $currentData['email']) {
             $existingUser = $userModel->where('email', $newEmail)->where('id !=', $userId)->first();
             if ($existingUser) {
-                return redirect()->back()->with('error', 'Email already in use by another account.');
+                return redirect()->to(base_url('/edit_profile'))->with('error', 'Email already in use by another account.')->withInput();
             }
         }
 
         $data = [
-            'name' => $this->request->getPost('name'),
+            'name' => $newName,
             'email' => $newEmail,
         ];
 
         if ($userModel->update($userId, $data)) {
-            return redirect()->to('user_profile')->with('success', 'Profile updated successfully.');
+            return redirect()->to(base_url('/user_profile'))->with('success', 'Profile updated successfully.');
         } else {
-            return redirect()->back()->with('error', 'Failed to update profile.');
+            return redirect()->back()->with('error', 'Failed to update profile.')->withInput(); // Maintain form data
         }
     }
 
