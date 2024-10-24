@@ -33,14 +33,10 @@
 
                 </div>
             </div>
-
-            <!-- Basic Card Example -->
             <div class="card shadow mb-4">
                 <div class="card shadow mb-4">
                     <div class="card-body">
                         <div class="row">
-                            <h2 class="h4 text-primary mb-3">Hasil Pencarian untuk: <?= esc($searchQuery); ?></h2>
-
                             <?php if (count($results) > 0): ?>
                                 <?php foreach ($results as $result): ?>
                                     <div class="col-md-4">
@@ -53,7 +49,6 @@
                                                     <div class="d-flex w-100 justify-content-between">
                                                         <h5 class="mb-1"><?= esc($result['name']); ?></h5>
                                                         <small>Kode Unit: <?= esc($result['unit_code']); ?></small>
-                                                    </div>
                                                     <p class="mb-1">Category ID: <?= esc($result['category_id']); ?></p>
                                                     <p class="mb-1">Stock: <?= esc($result['stock']); ?></p>
                                                     <p class="mb-1">Cost per Day: <?= esc($result['cost_rent_per_day']); ?></p>
