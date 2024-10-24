@@ -64,7 +64,6 @@ class UserController extends BaseController
 
     public function updateProfile()
     {
-
         if (!session()->get('isLoggedIn')) {
             return redirect()->to(base_url('/login'));
         }
@@ -77,9 +76,19 @@ class UserController extends BaseController
         }
 
         $userModel = new \App\Models\UserModel();
+        $newEmail = $this->request->getPost('email');
+        $currentData = $userModel->find($userId);
+
+        if ($newEmail !== $currentData['email']) {
+            $existingUser = $userModel->where('email', $newEmail)->where('id !=', $userId)->first();
+            if ($existingUser) {
+                return redirect()->back()->with('error', 'Email already in use by another account.');
+            }
+        }
+
         $data = [
             'name' => $this->request->getPost('name'),
-            'email' => $this->request->getPost('email'),
+            'email' => $newEmail,
         ];
 
         if ($userModel->update($userId, $data)) {
@@ -88,6 +97,7 @@ class UserController extends BaseController
             return redirect()->back()->with('error', 'Failed to update profile.');
         }
     }
+
 
     public function viewUnits()
     {
