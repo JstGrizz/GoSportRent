@@ -110,7 +110,7 @@ class AdminController extends BaseController
 
 
         if ($model->where('username', $username)->first() || $model->where('email', $email)->first()) {
-            return redirect()->to(base_url('admin/edit_user/' . $id))->with('error', 'Username or Email already exists');
+            return redirect()->back()->with('error', 'Username or Email already exists');
         }
 
 
@@ -203,7 +203,7 @@ class AdminController extends BaseController
         $name = $this->request->getPost('name');
 
         if ($model->where('name', $name)->first()) {
-            return redirect()->to(base_url('/admin/edit_category'))->with("error", "Name Category Can't be the same");
+            return redirect()->back()->with("error", "Name Category Can't be the same");
         }
         $model->update($id, [
             'name' => $this->request->getPost('name')
@@ -313,7 +313,7 @@ class AdminController extends BaseController
             $img->move(FCPATH . 'Assets/image/', $newImageName);
             return $newImageName;
         }
-        return '';  // Return empty string or handle as required
+        return '';
     }
 
     private function generateUniqueCode($model)
@@ -343,7 +343,7 @@ class AdminController extends BaseController
 
         $data['unit'] = $model->getUnitDetails($id);
         $data['categories'] = $categoryModel->findAll();
-        $data['selectedCategories'] = $unitCategoryModel->getCategoryIdsForUnit($id);  // This should return an array of category IDs
+        $data['selectedCategories'] = $unitCategoryModel->getCategoryIdsForUnit($id);
 
         return view('admin/edit_unit', $data);
     }
@@ -358,7 +358,7 @@ class AdminController extends BaseController
         }
 
         $unitModel = new UnitModel();
-        $unitCategoryModel = new UnitCategoryModel();  // Ensure this model is properly defined and loaded
+        $unitCategoryModel = new UnitCategoryModel();
         $currentUnit = $unitModel->find($id);
 
         // Get the image from the request
@@ -375,7 +375,7 @@ class AdminController extends BaseController
         $name = $this->request->getPost('name');
 
         if ($unitModel->where('name', $name)->first()) {
-            return redirect()->to(base_url('/admin/create_unit'))->with("error", "Name Unit Can't be the same");
+            return redirect()->back()->with("error", "Name Unit Can't be the same");
         }
 
         $updateData = [
