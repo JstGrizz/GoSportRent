@@ -12,36 +12,38 @@ Dashboard Peminjaman Alat Olahraga adalah sebuah antarmuka yang menyediakan visu
 
 ## List Fitur
 
-1. Admin
-   • Login
-   • Menambah, Mengedit, Menghapus user
-   • Menu Master User
-   o Menampilkan list user
-   o Edit user (nama, username, email, role )
-   • Menu Master Unit
-   o Menampilkan list unit
-   o Edit user (unit, category, stock, cost rent per_day, cost rent per_month, unit image)
-   o Add new user
-   • Master Category
-   o List category
-   o Edit category (name)
-   • Rental History
-   o List rental
-   o Edit history
-   • Policy Management
-2. User
-   • Login
-   • Ganti User Profile
-   • My Rent
-   o Pay
-   o Return (ada pengecekan jika lebih dari batas policy)
-   o Pay fee
-   • Browse Unit
-   o List produk
-   o Rent (ada validasi jika sedang on going, perhari/ month, jumlah unit, durasi peminjaman)
+# Admin & User Functionality Overview
+
+## 1. Admin
+
+- **Login**
+- **Manage Users**
+  - View user list
+  - Edit user (name, username, email, role)
+  - Add, edit, delete users
+- **Manage Units**
+  - View unit list
+  - Edit unit (name, category, stock, cost rent per day/month, image)
+  - Add new units
+- **Master Category**
+  - View category list
+  - Edit category (name)
+- **Rental History**
+  - View rental history
+  - Edit history
+- **Policy Management**
+
+## 2. User
+
+- **Login**
+- **Update Profile**
+- **My Rent**
+  - Pay, return, pay fee (checks for over-limit policy)
+- **Browse Units**
+  - View units, rent (validate ongoing rentals, per day/month, unit count, rental duration)
 
 ## Screen Capture Gambar Schema Project Dari Database
 
-<img src="<?= base_url('/Assets/image/'>"
+![Deskripsi gambar](./image/db.jpg)
 
 ## Screen Record Demo-Penjelasan Webiste
