@@ -53,7 +53,6 @@
                                                         <h5 class="card-body text-center"><?= esc($result['name']); ?></h5>
                                                     </div>
                                                     <small>Kode Unit: <?= esc($result['unit_code']); ?></small>
-                                                    <p class="mb-1">Category ID: <?= esc($result['category_id']); ?></p>
                                                     <p class="mb-1">Stock:
                                                         <?php if ($result['stock'] > 0): ?>
                                                             <span class="badge badge-success">Available</span>
