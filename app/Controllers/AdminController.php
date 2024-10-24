@@ -101,18 +101,18 @@ class AdminController extends BaseController
         }
 
         $model = new UserModel();
-
-        $model = new UserModel();
+        $currentData = $model->find($id);
         $name = $this->request->getVar('name');
         $username = $this->request->getVar('username');
         $email = $this->request->getVar('email');
         $role = $this->request->getVar('role');
 
+        $existingUsername = $model->where('username', $username)->first();
+        $existingEmail = $model->where('email', $email)->first();
 
-        if ($model->where('username', $username)->first() || $model->where('email', $email)->first()) {
+        if (($existingUsername && $existingUsername['id'] != $id) || ($existingEmail && $existingEmail['id'] != $id)) {
             return redirect()->back()->with('error', 'Username or Email already exists');
         }
-
 
         $data = [
             'name' => $name,
@@ -121,8 +121,9 @@ class AdminController extends BaseController
             'role' => $role
         ];
         $model->update($id, $data);
-        return redirect()->to('/admin/users');
+        return redirect()->to('/admin/users')->with('success', 'User updated successfully.');
     }
+
 
     public function deleteUser($id)
     {
@@ -193,23 +194,26 @@ class AdminController extends BaseController
 
     public function updateCategory($id)
     {
-        // Check if user is logged in and is an admin
+
         if (!session()->get('isLoggedIn') || session()->get('role') !== 'admin') {
             return redirect()->to(base_url('/login'));
         }
 
         $model = new CategoryModel();
-
+        $currentData = $model->find($id);
         $name = $this->request->getPost('name');
 
-        if ($model->where('name', $name)->first()) {
-            return redirect()->back()->with("error", "Name Category Can't be the same");
+
+        $existingCategory = $model->where('name', $name)->first();
+
+        if ($existingCategory && $existingCategory['id'] != $id) {
+            return redirect()->back()->with("error", "Another category with the same name already exists.");
         }
-        $model->update($id, [
-            'name' => $this->request->getPost('name')
-        ]);
-        return redirect()->to('/admin/categories');
+
+        $model->update($id, ['name' => $name]);
+        return redirect()->to('/admin/categories')->with('success', 'Category updated successfully.');
     }
+
 
     public function deleteCategory($id)
     {
@@ -349,7 +353,6 @@ class AdminController extends BaseController
     }
 
 
-
     public function updateUnit($id)
     {
         // Check if user is logged in and is an admin
@@ -363,7 +366,7 @@ class AdminController extends BaseController
 
         // Get the image from the request
         $img = $this->request->getFile('image');
-        $newName = $currentUnit['image'];  // Default to existing image
+        $newName = $currentUnit['image'];
 
         $targetPath = FCPATH . 'Assets/image/';
 
@@ -374,8 +377,8 @@ class AdminController extends BaseController
 
         $name = $this->request->getPost('name');
 
-        if ($unitModel->where('name', $name)->first()) {
-            return redirect()->back()->with("error", "Name Unit Can't be the same");
+        if ($unitModel->where('name', $name)->where('id !=', $id)->first()) {
+            return redirect()->back()->with("error", "Another unit with the same name already exists.");
         }
 
         $updateData = [
