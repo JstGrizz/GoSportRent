@@ -53,21 +53,18 @@ class AdminController extends BaseController
         }
 
         $model = new UserModel();
-        // Get input values
         $name = $this->request->getVar('name');
         $username = $this->request->getVar('username');
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
         $role = $this->request->getVar('role');
 
-        // Check if name, user or email already exists
-        if ($model->where('name', $name)->first()) {
-            return redirect()->to(base_url('admin/create_user'))->with('error', 'Name already exists');
-        } else if ($model->where('username', $username)->first() || $model->where('email', $email)->first()) {
+
+
+        if ($model->where('username', $username)->first() || $model->where('email', $email)->first()) {
             return redirect()->to(base_url('admin/create_user'))->with('error', 'Username or Email already exists');
         }
 
-        // Save user details
         $data = [
             'name' => $name,
             'username' => $username,
