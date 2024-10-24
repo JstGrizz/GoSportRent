@@ -47,6 +47,7 @@ Dashboard Peminjaman Alat Olahraga
 - Edit Name and Email | Validate if there's the same email 
 **My Rent**
   - Pay, return, pay fee (checks for over-limit policy) | Validate status paid (Unpaid, Paid, Refunded) | Validate status rent (waiting_approval, rented, waiting_return, returned, rejected)
+
 **Browse Units**
   - View units, rent | Validate user can only rent no more than 2 unit, and user cant rent if the stock is 0 or the amount selected exceeded the stock
 
