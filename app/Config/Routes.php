@@ -54,4 +54,4 @@ $routes->post('process_rental', 'UserController::processRental');
 $routes->get('my_rentals', 'UserController::myRentals');
 $routes->get('pay_rental/(:num)', 'UserController::payRental/$1');
 $routes->get('return_rental/(:num)', 'UserController::returnRental/$1');
-$routes->get('search_results', 'UnitController::search_results');
+$routes->post('search', 'SearchController::index');
