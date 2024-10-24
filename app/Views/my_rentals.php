@@ -60,7 +60,7 @@
                                                 <strong>Rental Date:</strong> <?= esc($rental['rental_date']); ?><br>
                                                 <strong>Days Rented:</strong> <?= esc($rental['days_rented']); ?><br>
                                                 <strong>Cost: Rp. </strong> <?= esc(number_format($rental['cost'], 0, ',', '.')); ?><br>
-                                                <strong>Amount: Rp. </strong> <?= esc(number_format($rental['amount'], 0, ',', '.')); ?>
+                                                <strong>Amount:</strong> <?= esc($rental['amount'],); ?>
                                             </p>
                                             <p class="card-text">
                                                 <strong>Status:</strong>
