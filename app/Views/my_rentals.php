@@ -52,15 +52,14 @@
                                                 alt="Image of <?= esc($rental['unit_name']); ?>"
                                                 class="img-fluid mb-3 mx-auto d-block"
                                                 style="max-height: 200px; width: auto; border-radius: 50%;">
-                                            <!-- Adjusted for circular and centered image -->
                                             <h5 class="card-title"><?= esc($rental['unit_name']); ?></h5>
                                             <h6 class="card-subtitle mb-2 text-muted">Unit Code:
                                                 <?= esc($rental['unit_code']); ?></h6>
                                             <p class="card-text">
                                                 <strong>Rental Date:</strong> <?= esc($rental['rental_date']); ?><br>
                                                 <strong>Days Rented:</strong> <?= esc($rental['days_rented']); ?><br>
-                                                <strong>Cost: Rp. </strong> <?= esc(number_format($rental['cost'], 0, ',', '.')); ?><br>
-                                                <strong>Amount: Rp. </strong> <?= esc(number_format($rental['amount'], 0, ',', '.')); ?>
+                                                <strong>Cost:</strong> <?= esc($rental['cost']); ?><br>
+                                                <strong>Amount:</strong> <?= esc($rental['amount']); ?>
                                             </p>
                                             <p class="card-text">
                                                 <strong>Status:</strong>
@@ -75,7 +74,7 @@
                                                 </span>
                                             </p>
                                             <div class="text-center mt-3">
-                                                <?php if ($rental['status_paid'] !== 'paid'): ?>
+                                                <?php if ($rental['status_paid'] == 'unpaid'): ?>
                                                     <a href="<?= base_url('pay_rental/' . $rental['id']); ?>"
                                                         class="btn btn-success">Pay</a>
                                                 <?php endif; ?>
@@ -87,14 +86,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                <?php endforeach; ?>
                                 </div>
-                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<?= $this->endSection(); ?>
+    <?= $this->endSection(); ?>

@@ -13,12 +13,20 @@ class UnitModel extends Model
 
     public function fetchUnitsWithCategories()
     {
-        $this->select('units.*, GROUP_CONCAT(categories.name ORDER BY categories.name ASC) AS category_names');
+        $this->select('units.*, GROUP_CONCAT(categories.name ORDER BY categories.name ASC) as category_names');
         $this->join('unit_categories', 'unit_categories.unit_id = units.id', 'left');
         $this->join('categories', 'categories.id = unit_categories.category_id', 'left');
         $this->groupBy('units.id');
-        return $this->findAll();
+
+        $units = $this->findAll();
+        foreach ($units as $key => $unit) {
+            $units[$key]['categories'] = array_map(function ($categoryName) {
+                return ['name' => trim($categoryName)];
+            }, explode(',', $unit['category_names']));
+        }
+        return $units;
     }
+
 
     public function getUnitDetails($id)
     {

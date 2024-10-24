@@ -11,8 +11,25 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
+            <h1 class="h3 mb-2 text-gray-800">Add New Policy</h1>
+            <!-- Flashdata Alert -->
+            <?php if (session()->getFlashdata('success')): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('success'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endif; ?>
 
-            <h1 class="h3 mb-2 text-gray-800">Add New Category</h1>
+            <?php if (session()->getFlashdata('error')): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('error'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endif; ?>
             <div class="row">
                 <div class="col-lg-6">
 
@@ -25,12 +42,13 @@
                         <form action="<?= base_url('admin/store_policy'); ?>" method="post">
                             <div class="form-group">
                                 <label for="max_rental_days">Max Rental Days:</label>
-                                <input type="number" name="max_rental_days" id="max_rental_days" class="form-control" required>
+                                <input type="number" name="max_rental_days" id="max_rental_days" class="form-control"
+                                    required>
                             </div>
                             <div class="form-group">
                                 <label for="overdue_fee_per_day">Overdue Fee Per Day:</label>
-                                <input type="text" name="overdue_fee_per_day" id="overdue_fee_per_day" class="form-control"
-                                    required>
+                                <input type="text" name="overdue_fee_per_day" id="overdue_fee_per_day"
+                                    class="form-control" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Save Policy</button>
                         </form>

@@ -11,8 +11,25 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
             <h1 class="h3 mb-2 text-gray-800">Add New Category</h1>
+            <!-- Flashdata Alert -->
+            <?php if (session()->getFlashdata('success')): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('success'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endif; ?>
+
+            <?php if (session()->getFlashdata('error')): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('error'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endif; ?>
             <div class="row">
                 <div class="col-lg-6">
 
@@ -25,7 +42,7 @@
                         <form action="<?= base_url('admin/store_category'); ?>" method="post">
                             <div class="form-group">
                                 <label for="name">Category Name:</label>
-                                <input type="text" name="name" id="name" required>
+                                <input class="form-control" name="name" id="name" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Add Category</button>
                         </form>

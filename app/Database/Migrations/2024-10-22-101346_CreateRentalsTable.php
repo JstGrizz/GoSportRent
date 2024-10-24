@@ -52,7 +52,7 @@ class CreateRentalsTable extends Migration
             ],
             'status_paid' => [
                 'type' => 'ENUM',
-                'constraint' => ['unpaid', 'paid', 'paid_with_fee'],
+                'constraint' => ['unpaid', 'paid', 'fee', 'refunded'],
                 'default' => 'unpaid',
             ],
             'approved_rent_by' => [
