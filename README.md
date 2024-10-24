@@ -53,6 +53,6 @@ Dashboard Peminjaman Alat Olahraga
 
 ## Schema Project Dari Database
 
-![Schemas Database](https://github.com/your-github-username/your-repository-name/blob/master/public/Assets/gosportrent.jpg?raw=true)
+![Schemas Database](https://github.com/JstGrizz/GoSportRent/blob/master/public/Assets/gosportrent.jpg?raw=true)
 
 ## Screen Record Demo-Penjelasan Webiste
