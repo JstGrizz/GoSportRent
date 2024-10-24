@@ -24,10 +24,6 @@ class CreateUnitsTable extends Migration
                 'constraint' => '50',
                 'unique' => true,
             ],
-            'category_id' => [
-                'type' => 'INT',
-                'unsigned' => true,
-            ],
             'stock' => [
                 'type' => 'INT',
                 'constraint' => 11,
@@ -46,11 +42,10 @@ class CreateUnitsTable extends Migration
             'image' => [
                 'type' => 'VARCHAR',
                 'constraint' => '255',
-                'null' => true, // Make it nullable if the image is optional
+                'null' => true,
             ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('category_id', 'categories', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('units');
     }
 

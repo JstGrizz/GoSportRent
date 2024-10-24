@@ -44,7 +44,7 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Unit Code</th>
-                                    <th>Category</th>
+                                    <th>Categories</th>
                                     <th>Stock</th>
                                     <th>Cost Per Day</th>
                                     <th>Cost Per Month</th>
@@ -58,10 +58,11 @@
                                         <td><?= $unit['id']; ?></td>
                                         <td><?= $unit['name']; ?></td>
                                         <td><?= $unit['unit_code']; ?></td>
-                                        <td><?= $unit['category_name']; ?></td>
+                                        <td><?= $unit['category_names']; ?></td>
+                                        <!-- Adjusted to show multiple categories -->
                                         <td><?= $unit['stock']; ?></td>
-                                        <td><?= number_format($unit['cost_rent_per_day'], 0); ?></td>
-                                        <td><?= number_format($unit['cost_rent_per_month'], 0); ?></td>
+                                        <td><?= number_format($unit['cost_rent_per_day'], 2); ?></td>
+                                        <td><?= number_format($unit['cost_rent_per_month'], 2); ?></td>
                                         <td><img src="<?= base_url('/Assets/image/' . $unit['image']); ?>"
                                                 alt="Image of <?= esc($unit['name']); ?>"
                                                 style="width: 100px; height: auto;"></td>
