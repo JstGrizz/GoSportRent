@@ -51,8 +51,8 @@ Dashboard Peminjaman Alat Olahraga
 **Browse Units**
   - View units, rent | Validate user can only rent no more than 2 unit, and user cant rent if the stock is 0 or the amount selected exceeded the stock
 
-## Screen Capture Gambar Schema Project Dari Database
+## Schema Project Dari Database
 
-![screen picture db](./Asset/image/db.jpg)
+(https://github.com/your-github-username/your-repository-name/blob/master/public/Assets/gosportrent.jpg?raw=true)
 
 ## Screen Record Demo-Penjelasan Webiste
