@@ -36,11 +36,23 @@
                             </div>
                             <form class="user" role="form" action="<?= base_url('auth/register') ?>" method="post">
                                 <div class="form-group">
+                                    <!-- Alert for flash messages -->
                                     <?php if (session()->getFlashdata('error')): ?>
-                                        <p style="color: red;"><?= session()->getFlashdata('error') ?></p>
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <?= session()->getFlashdata('error'); ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
                                     <?php endif; ?>
+
                                     <?php if (session()->getFlashdata('success')): ?>
-                                        <p style="color: green;"><?= session()->getFlashdata('success') ?></p>
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <?= session()->getFlashdata('success'); ?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
                                     <?php endif; ?>
                                 </div>
                                 <div class="form-group row">
