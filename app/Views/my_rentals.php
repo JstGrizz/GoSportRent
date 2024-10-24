@@ -75,7 +75,7 @@
                                             </span>
                                         </p>
                                         <div class="text-center mt-3">
-                                            <?php if ($rental['status_paid'] !== 'paid'): ?>
+                                            <?php if ($rental['status_paid'] == 'unpaid'): ?>
                                             <a href="<?= base_url('pay_rental/' . $rental['id']); ?>"
                                                 class="btn btn-success">Pay</a>
                                             <?php endif; ?>

@@ -13,6 +13,24 @@
         <div class="container-fluid">
 
             <h1 class="h3 mb-2 text-gray-800">User Management</h1>
+            <!-- Flashdata Alert -->
+            <?php if (session()->getFlashdata('success')): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('success'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endif; ?>
+
+            <?php if (session()->getFlashdata('error')): ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('error'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endif; ?>
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">DataTables User</h6>
@@ -33,19 +51,19 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($users as $user): ?>
-                                <tr>
-                                    <td><?= $user['id']; ?></td>
-                                    <td><?= $user['name']; ?></td>
-                                    <td><?= $user['username']; ?></td>
-                                    <td><?= $user['email']; ?></td>
-                                    <td><?= $user['role']; ?></td>
-                                    <td>
-                                        <a href="<?= base_url('admin/edit_user/' . $user['id']); ?>"
-                                            class="btn btn-warning">Edit</a>
-                                        <a href="<?= base_url('admin/delete_user/' . $user['id']); ?>"
-                                            class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td><?= $user['id']; ?></td>
+                                        <td><?= $user['name']; ?></td>
+                                        <td><?= $user['username']; ?></td>
+                                        <td><?= $user['email']; ?></td>
+                                        <td><?= $user['role']; ?></td>
+                                        <td>
+                                            <a href="<?= base_url('admin/edit_user/' . $user['id']); ?>"
+                                                class="btn btn-warning">Edit</a>
+                                            <a href="<?= base_url('admin/delete_user/' . $user['id']); ?>"
+                                                class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>

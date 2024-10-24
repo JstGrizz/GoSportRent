@@ -96,10 +96,11 @@ class UserController extends BaseController
         }
 
         $model = new UnitModel();
-        $data['units'] = $model->fetchUnitsWithCategory();
+        $data['units'] = $model->fetchUnitsWithCategories();
 
         return view('unit_list', $data);
     }
+
 
     public function rentUnit($unitId)
     {

@@ -154,6 +154,12 @@ class AdminController extends BaseController
         }
 
         $model = new CategoryModel();
+        $name = $this->request->getPost('name');
+
+        if ($model->where('name', $name)->first()) {
+            return redirect()->to(base_url('/admin/create_category'))->with("error", "Name Category Can't be the same");
+        }
+
         $model->save([
             'name' => $this->request->getPost('name')
         ]);
@@ -232,7 +238,7 @@ class AdminController extends BaseController
         $unitModel = new UnitModel();
         $unitCategoryModel = new UnitCategoryModel();
 
-        helper('text');  // Load the text helper
+        helper('text');
 
         $img = $this->request->getFile('image');
         $newImageName = '';
@@ -243,7 +249,6 @@ class AdminController extends BaseController
             $img->move($targetPath, $newImageName);
         }
 
-        // Auto Generate Unit Code
         $unique = false;
         $unitCode = '';
         while (!$unique) {
@@ -253,8 +258,14 @@ class AdminController extends BaseController
             }
         }
 
+        $name = $this->request->getPost('name');
+
+        if ($unitModel->where('name', $name)->first()) {
+            return redirect()->to(base_url('/admin/create_unit'))->with("error", "Name Unit Can't be the same");
+        }
+
         $unitId = $unitModel->insert([
-            'name' => $this->request->getPost('name'),
+            'name' => $name,
             'unit_code' => $unitCode,
             'stock' => $this->request->getPost('stock'),
             'cost_rent_per_day' => $this->request->getPost('cost_rent_per_day'),
@@ -262,8 +273,8 @@ class AdminController extends BaseController
             'image' => $newImageName
         ], true);
 
-        // Handling category_ids input
-        $categoryIds = $this->request->getPost('category_ids') ?? []; // Default to an empty array if nothing is sent
+
+        $categoryIds = $this->request->getPost('category_ids') ?? [];
 
         foreach ($categoryIds as $categoryId) {
             $unitCategoryModel->insert([
@@ -434,7 +445,7 @@ class AdminController extends BaseController
             $unitModel->updateStock($unitId, 1);
         } elseif ($newStatus === 'rejected') {
             $updateData['rejected_by'] = session()->get('id');
-            if ($rental['status_paid'] === 'paid') {
+            if ($rental['status_paid'] === 'paid' && $currentStatus === 'waiting_approval') {
                 $updateData['status_paid'] = 'refunded';
             }
         }

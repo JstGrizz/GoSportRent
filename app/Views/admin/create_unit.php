@@ -11,23 +11,22 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
             <h1 class="h3 mb-2 text-gray-800">Add New Unit</h1>
             <?php if (session()->getFlashdata('success')): ?>
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <?= session()->getFlashdata('success'); ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('success'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             <?php endif; ?>
             <?php if (session()->getFlashdata('error')): ?>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <?= session()->getFlashdata('error'); ?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <?= session()->getFlashdata('error'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             <?php endif; ?>
             <div class="card shadow mb-4">
                 <div class="card-body">
@@ -40,12 +39,12 @@
                             <label>Categories:</label>
                             <div class="chip-container">
                                 <?php foreach ($categories as $category): ?>
-                                <div class="chip" data-id="<?= $category['id']; ?>">
-                                    <?= $category['name']; ?>
-                                </div>
-                                <!-- Hidden inputs to store the category IDs -->
-                                <input type="checkbox" name="category_ids[]" id="cat-<?= $category['id']; ?>"
-                                    value="<?= $category['id']; ?>" class="d-none">
+                                    <div class="chip" data-id="<?= $category['id']; ?>">
+                                        <?= $category['name']; ?>
+                                    </div>
+                                    <!-- Hidden inputs to store the category IDs -->
+                                    <input type="checkbox" name="category_ids[]" id="cat-<?= $category['id']; ?>"
+                                        value="<?= $category['id']; ?>" class="d-none">
                                 <?php endforeach; ?>
                             </div>
                         </div>
@@ -82,28 +81,28 @@
 </div>
 <!-- End of Content Wrapper -->
 <script>
-document.querySelectorAll('.chip').forEach(chip => {
-    chip.addEventListener('click', function() {
-        const input = document.getElementById('cat-' + this.dataset.id);
-        input.checked = !input.checked;
-        this.classList.toggle('selected');
+    document.querySelectorAll('.chip').forEach(chip => {
+        chip.addEventListener('click', function() {
+            const input = document.getElementById('cat-' + this.dataset.id);
+            input.checked = !input.checked;
+            this.classList.toggle('selected');
+        });
     });
-});
 </script>
 <style>
-.chip {
-    display: inline-block;
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    border-radius: 25px;
-    margin-right: 5px;
-    background-color: #f8f9fa;
-}
+    .chip {
+        display: inline-block;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        border-radius: 25px;
+        margin-right: 5px;
+        background-color: #f8f9fa;
+    }
 
-.chip.selected {
-    background-color: #007bff;
-    color: white;
-}
+    .chip.selected {
+        background-color: #007bff;
+        color: white;
+    }
 </style>
 <?= $this->endSection(); ?>
