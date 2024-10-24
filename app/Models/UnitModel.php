@@ -8,7 +8,7 @@ class UnitModel extends Model
 {
     protected $table = 'units';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'unit_code', 'category_id', 'stock', 'cost_rent_per_day', 'cost_rent_per_month','image'];
+    protected $allowedFields = ['name', 'unit_code', 'category_id', 'stock', 'cost_rent_per_day', 'cost_rent_per_month', 'image'];
     protected $returnType = 'array';
     protected $useTimestamps = false;
 
@@ -23,5 +23,15 @@ class UnitModel extends Model
     public function getUnitDetails($id)
     {
         return $this->find($id);
+    }
+
+    public function updateStock($unitId, $quantityChange)
+    {
+        $unit = $this->find($unitId);
+        if ($unit) {
+            $newStock = $unit['stock'] + $quantityChange;
+            $newStock = max($newStock, 0);
+            $this->update($unitId, ['stock' => $newStock]);
+        }
     }
 }
