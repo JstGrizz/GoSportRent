@@ -240,7 +240,7 @@ class UserController extends BaseController
         if ($daysRented > $policy['max_rental_days']) {
             $overdueDays = $daysRented - $policy['max_rental_days'];
             $overdueFee = $overdueDays * $policy['overdue_fee_per_day'];
-            $updateData['status_paid'] = 'paid_with_fee';
+            $updateData['status_paid'] = 'fee';
             $updateData['cost'] += $overdueFee;
         }
 
