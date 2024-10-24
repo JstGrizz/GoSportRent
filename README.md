@@ -6,5 +6,3 @@
 -Farhan Abdullah Rynold
 
 ## Deskripsi Project
-
-Dashboard Peminjaman Alat Olahraga
