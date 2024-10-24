@@ -53,13 +53,29 @@ class AdminController extends BaseController
         }
 
         $model = new UserModel();
+        // Get input values
+        $name = $this->request->getVar('name');
+        $username = $this->request->getVar('username');
+        $email = $this->request->getVar('email');
+        $password = $this->request->getVar('password');
+        $role = $this->request->getVar('role');
+
+        // Check if name, user or email already exists
+        if ($model->where('name', $name)->first()) {
+            return redirect()->to(base_url('admin/create_user'))->with('error', 'Name already exists');
+        } else if ($model->where('username', $username)->first() || $model->where('email', $email)->first()) {
+            return redirect()->to(base_url('admin/create_user'))->with('error', 'Username or Email already exists');
+        }
+
+        // Save user details
         $data = [
-            'name' => $this->request->getPost('name'),
-            'username' => $this->request->getPost('username'),
-            'email' => $this->request->getPost('email'),
-            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            'role' => $this->request->getPost('role')
+            'name' => $name,
+            'username' => $username,
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'role' => $role
         ];
+
 
         if ($model->save($data)) {
             return redirect()->to(base_url('admin/users'))->with('success', 'User successfully added');
@@ -315,13 +331,13 @@ class AdminController extends BaseController
         }
 
         $model = new UnitModel();
-        $currentUnit = $model->find($id); // Fetch the current unit to get the existing image
+        $currentUnit = $model->find($id);
 
         // Get the image from the request
         $img = $this->request->getFile('image');
-        $newName = $currentUnit['image']; // Default to the current image if no new image is uploaded
+        $newName = $currentUnit['image'];
 
-        // Define the path where the image should be saved
+
         $targetPath = FCPATH . 'Assets/image/';
 
         if ($img->isValid() && !$img->hasMoved()) {
@@ -397,19 +413,25 @@ class AdminController extends BaseController
             return redirect()->to(base_url('/login'));
         }
 
-        $model = new RentalModel();
-        $rental = $model->where('id', $id)->first();
+        $rentalModel = new RentalModel();
+        $unitModel = new UnitModel();
+
+        $rental = $rentalModel->where('id', $id)->first();
         $currentStatus = $rental['status_rent'];
         $newStatus = $this->request->getPost('status_rent');
         $updateData = ['status_rent' => $newStatus];
-
+        $unitId = $rental['unit_id'];
 
         if ($currentStatus === 'waiting_approval' && $newStatus === 'rented') {
             $updateData['approved_rent_by'] = session()->get('id');
             $updateData['rental_date'] = date("Y-m-d");
+
+            $unitModel->updateStock($unitId, -1);
         } elseif ($currentStatus === 'waiting_return' && $newStatus === 'returned') {
             $updateData['approved_return_by'] = session()->get('id');
             $updateData['return_date'] = date("Y-m-d");
+
+            $unitModel->updateStock($unitId, 1);
         } elseif ($newStatus === 'rejected') {
             $updateData['rejected_by'] = session()->get('id');
             if ($rental['status_paid'] === 'paid') {
@@ -417,12 +439,13 @@ class AdminController extends BaseController
             }
         }
 
-        if ($model->update($id, $updateData)) {
+        if ($rentalModel->update($id, $updateData)) {
             return redirect()->to('/admin/rental_history')->with('success', 'Rental status updated successfully.');
         } else {
             return redirect()->to('/admin/rental_history')->with('error', 'Failed to update rental status.');
         }
     }
+
 
     public function deleteRental($id)
     {

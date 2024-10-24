@@ -38,27 +38,27 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($rentals as $rental): ?>
-                                <tr>
-                                    <td><?= $rental['id']; ?></td>
-                                    <td><?= $rental['user_name']; ?></td>
-                                    <td><?= $rental['unit_name']; ?></td>
-                                    <td><?= $rental['rental_date']; ?></td>
-                                    <td><?= $rental['days_rented']; ?></td>
-                                    <td><?= number_format($rental['amount'], 0); ?></td>
-                                    <td><?= number_format($rental['cost'], 0); ?></td>
-                                    <td style="background-color: <?= getColorForStatusRent($rental['status_rent']); ?>">
-                                        <?= ucwords(str_replace('_', ' ', $rental['status_rent'])); ?></td>
-                                    <td style="background-color: <?= getColorForStatusPaid($rental['status_paid']); ?>">
-                                        <?= ucwords(str_replace(['_', 'with fee'], [' ', 'with Fee'], $rental['status_paid'])); ?>
-                                    </td>
-                                    <td><?= $rental['return_date'] ?: 'N/A'; ?></td>
-                                    <td>
-                                        <a href="<?= base_url('admin/edit_rental/' . $rental['id']); ?>"
-                                            class="btn btn-warning">Edit</a>
-                                        <a href="<?= base_url('admin/delete_rental/' . $rental['id']); ?>"
-                                            class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td><?= $rental['id']; ?></td>
+                                        <td><?= $rental['user_name']; ?></td>
+                                        <td><?= $rental['unit_name']; ?></td>
+                                        <td><?= $rental['rental_date']; ?></td>
+                                        <td><?= $rental['days_rented']; ?></td>
+                                        <td><?= number_format($rental['amount'], 0); ?></td>
+                                        <td><?= number_format($rental['cost'], 0); ?></td>
+                                        <td style="background-color: <?= getColorForStatusRent($rental['status_rent']); ?>">
+                                            <?= ucwords(str_replace('_', ' ', $rental['status_rent'])); ?></td>
+                                        <td style="background-color: <?= getColorForStatusPaid($rental['status_paid']); ?>">
+                                            <?= ucwords(str_replace(['_', 'with fee'], [' ', 'with Fee'], $rental['status_paid'])); ?>
+                                        </td>
+                                        <td><?= $rental['return_date'] ?: 'N/A'; ?></td>
+                                        <td>
+                                            <a href="<?= base_url('admin/edit_rental/' . $rental['id']); ?>"
+                                                class="btn btn-warning">Approve</a>
+                                            <a href="<?= base_url('admin/delete_rental/' . $rental['id']); ?>"
+                                                class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>

@@ -29,4 +29,14 @@ class UnitModel extends Model
         $this->groupBy('units.id');
         return $this->first();
     }
+
+    public function updateStock($unitId, $quantityChange)
+    {
+        $unit = $this->find($unitId);
+        if ($unit) {
+            $newStock = $unit['stock'] + $quantityChange;
+            $newStock = max($newStock, 0);
+            $this->update($unitId, ['stock' => $newStock]);
+        }
+    }
 }
